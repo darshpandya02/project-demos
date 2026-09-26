@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b0e14" />
+    <title>cpp-data-structures demo — Darsh Pandya</title>
+    <meta name="description" content="Recorded session of cpp-data-structures: a header-only C++20 data structure library, its tests under sanitizers, an AVL tree and hash map demo, and benchmarks against the std:: containers." />
+    <script type="module" src="/src/main.js"></script>
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="/">darsh<span>@</span>demos <span>~</span></a>
+        <nav class="nav">
+          <a href="/">index</a>
+          <a href="/raft/">raft</a>
+          <a href="/robot-factory/">robot-factory</a>
+          <a href="/image-processing/">image-processing</a>
+          <a href="/meditrack/">meditrack</a>
+          <a href="/data-structures/" aria-current="page">data-structures</a>
+        </nav>
+        <a class="ext" href="https://github.com/darshpandya02/cpp-data-structures">source ↗</a>
+      </div>
+    </div>
+
+    <main>
+      <section class="window">
+        <header><div class="dots"><i></i><i></i><i></i></div><div class="title">darsh@demos — cpp-data-structures</div></header>
+        <div class="body">
+          <h1>cpp-data-structures</h1>
+          <p>
+            <span class="tag">C++20</span><span class="tag">header-only</span><span class="tag">ASan · UBSan · TSan</span>
+          </p>
+          <p class="lead">
+            A header-only C++20 library of data structures in namespace <code>dsl</code>: a dynamic
+            array, singly and doubly linked lists, a ring buffer, stack and queue adapters, an
+            unbalanced binary search tree, an AVL tree, a Robin Hood open-addressing hash map, and a
+            binary heap. Memory is managed by hand with RAII, the rule of five and allocator support.
+            Every container is tested against its <code>std::</code> counterpart and benchmarked
+            against it. This is a 2026 rebuild of a 2023 project whose code was not kept.
+          </p>
+          <p>
+            Source: <a href="https://github.com/darshpandya02/cpp-data-structures">github.com/darshpandya02/cpp-data-structures</a>
+            (the README has the full benchmark table for n = 1k to 1M)
+          </p>
+        </div>
+      </section>
+
+      <section class="window">
+        <header><div class="dots"><i></i><i></i><i></i></div><div class="title">data-structures.cast — 110×32</div></header>
+        <div class="body flush">
+          <div class="player" data-cast="/casts/data-structures.cast" data-poster="npt:0:44"></div>
+        </div>
+      </section>
+
+      <section class="window">
+        <header><div class="dots"><i></i><i></i><i></i></div><div class="title">cat NOTES</div></header>
+        <div class="body">
+          <p class="meta">
+            <span><b>recorded</b> 2026-09-26, 18:12 EDT</span>
+            <span><b>machine</b> MacBook Air, Apple M5 (10 cores), 24 GB, macOS 26.5.2</span>
+            <span><b>toolchain</b> Apple clang 21.0.0, make, doctest 2.4.12 (vendored)</span>
+            <span><b>length</b> about 62 s (pauses longer than 2 s are shortened on playback)</span>
+          </p>
+
+          <h2>What the recording shows</h2>
+          <ul>
+            <li>A fresh clone and a build of the tests, the demo program and the benchmark.</li>
+            <li>The unit tests: 64 doctest cases with 978,254 assertions, all passing. They include
+              randomized runs that apply thousands of operations to each container and to its
+              <code>std::</code> counterpart and compare the two after every operation.</li>
+            <li>The same tests built with <code>-fsanitize=address,undefined</code> and then with
+              <code>-fsanitize=thread</code>. Both pass with no sanitizer reports.</li>
+            <li>A leak check with macOS <code>leaks</code>: 0 leaks. LeakSanitizer does not run on Apple
+              silicon. On Linux, CI runs ASan with leak detection, using g++ and clang++.</li>
+            <li><code>dsl-demo avl</code> inserts 10, 20, 30, 40, 50, 25 and draws the tree after each
+              insert. 30 and 50 each trigger a single rotation, and 25 needs a double rotation.
+              The tree's own <code>validate()</code> check passes after every step.</li>
+            <li>Inserting 1 to 10,000 in sorted order: the plain BST reaches height 10,000 (a
+              linked list), while the AVL tree stays at height 14.</li>
+            <li>The hash map growing from 0 to 2,048 buckets as 1,000 keys go in, with the load
+              factor and the longest probe at each rehash. Then half the keys are erased by
+              backward shift, with no tombstones.</li>
+            <li>A short benchmark (n = 1k and 100k) against <code>std::vector</code>,
+              <code>std::list</code>, <code>std::map</code>, <code>std::unordered_map</code>,
+              <code>std::priority_queue</code> and <code>std::queue</code>. The std containers
+              win some rows. <code>std::queue</code> is faster at push+pop, for example, and the
+              hash map is faster at erase and iteration.</li>
+          </ul>
+          <p class="dim">
+            Other heavy jobs were running on the laptop during this recording (load average around 12),
+            so the short benchmark's numbers are noisier than the README's table, which was measured on
+            a quieter machine at n = 1k to 1M. The benchmark alternates dsl and std runs and reports
+            medians, so the ratios are more stable than the absolute times. Build steps are also slow
+            under that load, and pauses longer than 2 s are shortened on playback.
+          </p>
+
+          <h2>Exact commands</h2>
+          <p class="dim">
+            These are the commands the recording script ran, in order. The prompt in the recording
+            shows only the current directory name, and each command's text is printed before it runs.
+            The script is
+            <a href="https://github.com/darshpandya02/project-demos/blob/main/recording/dsl.sh">recording/dsl.sh</a>,
+            and it was recorded from an empty directory with
+            <code>asciinema rec --cols 110 --rows 32 -i 2 -c "bash recording/dsl.sh"</code>.
+          </p>
+          <!-- commands:dsl.sh -->
+        </div>
+      </section>
+    </main>
+
+    <footer class="status">
+      <div class="inner">
+        <span class="mode">NORMAL</span>
+        <span class="dim">recorded 2026-09-26 on a MacBook Air (Apple M5, 24 GB), macOS 26.5.2</span>
+        <span class="faint">│</span>
+        <a href="https://github.com/darshpandya02/cpp-data-structures">cpp-data-structures</a>
+        <a href="https://github.com/darshpandya02/project-demos">source of this site</a>
+      </div>
+    </footer>
+  </body>
+</html>

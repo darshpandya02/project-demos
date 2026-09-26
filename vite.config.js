@@ -36,6 +36,7 @@ export default defineConfig({
         factory: page("robot-factory/index.html"),
         image: page("image-processing/index.html"),
         meditrack: page("meditrack/index.html"),
+        dsl: page("data-structures/index.html"),
       },
     },
   },

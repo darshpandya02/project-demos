@@ -13,7 +13,7 @@ from playwright.sync_api import sync_playwright
 
 BASE = sys.argv[1].rstrip("/")
 SHOTS = sys.argv[2] if len(sys.argv) > 2 else None
-PAGES = ["/raft/", "/robot-factory/", "/image-processing/", "/meditrack/"]
+PAGES = ["/raft/", "/robot-factory/", "/image-processing/", "/meditrack/", "/data-structures/"]
 
 failures = []
 
