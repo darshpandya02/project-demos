@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b0e14" />
+    <title>Robot factory (BSDS PA3) demo — Darsh Pandya</title>
+    <meta name="description" content="Recorded session of the BSDS PA3 primary-backup robot factory in C++: client load, backup failure and recovery, primary failover." />
+    <script type="module" src="/src/main.js"></script>
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="/">darsh<span>@</span>demos <span>~</span></a>
+        <nav class="nav">
+          <a href="/">index</a>
+          <a href="/raft/">raft</a>
+          <a href="/robot-factory/" aria-current="page">robot-factory</a>
+          <a href="/image-processing/">image-processing</a>
+        </nav>
+        <a class="ext" href="https://github.com/darshpandya02/BSDS/tree/main/PA3/factory_src">source ↗</a>
+      </div>
+    </div>
+
+    <main>
+      <section class="window">
+        <header><div class="dots"><i></i><i></i><i></i></div><div class="title">darsh@demos — BSDS/PA3/factory_src</div></header>
+        <div class="body">
+          <h1>Robot factory: primary-backup replication</h1>
+          <p>
+            <span class="tag">C++11</span><span class="tag">TCP sockets</span><span class="tag">threads</span>
+          </p>
+          <p class="lead">
+            Programming assignment 3 of Building Scalable Distributed Systems. Customers order robots
+            and read their customer records from a "factory" server. Each connection gets an
+            engineer thread. Orders go through a single admin thread, which appends each one to a
+            log, replicates it to every backup factory, and only then updates the customer record
+            and ships the robot.
+          </p>
+          <p>
+            The code has no fixed primary. The first factory that receives an order becomes the
+            primary and connects to its peers. The peers then act as backups: they write each
+            entry into their own log and apply it once a later message carries a higher commit
+            index. If the primary loses a backup, it skips that backup and tries to reconnect on
+            every later order. When the reconnect succeeds, it replays its committed log to the
+            backup before sending new entries. If the primary dies, clients can send orders to a
+            backup, which then takes over as primary with the data it already has.
+          </p>
+          <p>
+            Source: <a href="https://github.com/darshpandya02/BSDS/tree/main/PA3/factory_src">github.com/darshpandya02/BSDS, PA3/factory_src</a>
+            <span class="dim">(PA1 and PA2 are in the same repository)</span>
+          </p>
+        </div>
+      </section>
+
+      <section class="window">
+        <header><div class="dots"><i></i><i></i><i></i></div><div class="title">robot-factory.cast — 110×32</div></header>
+        <div class="body flush">
+          <div class="player" data-cast="/casts/robot-factory.cast" data-poster="npt:0:40"></div>
+        </div>
+      </section>
+
+      <section class="window">
+        <header><div class="dots"><i></i><i></i><i></i></div><div class="title">cat NOTES</div></header>
+        <div class="body">
+          <p class="meta">
+            <span><b>recorded</b> 2026-09-26, 12:45 EDT</span>
+            <span><b>machine</b> MacBook Air, Apple M5 (10 cores), 24 GB, macOS 26.5.2</span>
+            <span><b>toolchain</b> Apple clang 21.0.0</span>
+            <span><b>length</b> about 85 s (pauses longer than 2 s are shortened on playback)</span>
+          </p>
+
+          <h2>What the recording shows</h2>
+          <ul>
+            <li>A fresh <code>git clone</code> of the repository, built with <code>make CXX=clang++</code>.
+              There is one compiler warning, for an unused counter.</li>
+            <li>Three factories on ports 12000 to 12002. Each one is given the other two as peers.</li>
+            <li>8 customer threads each place 2,000 orders on 12000, which becomes the primary:
+              about 8,200 orders/s, with an average latency of about 1 ms. Then 8 × 2,000 record
+              reads: about 75,000 reads/s. Reads are served locally and need no replication.</li>
+            <li>A record dump from backup 12001 shows the replicated customer table. One entry is
+              one order behind (see below).</li>
+            <li>Backup 12002 is killed with <code>SIGKILL</code>. The primary skips it and 2,000 more
+              orders go through.</li>
+            <li>12002 is restarted with empty state. The next order makes the primary reconnect and
+              replay its whole committed log, about 18,000 entries. That order took about 1.8 s,
+              which is the large max latency on that line. Afterwards 12002's dump matches the
+              primary.</li>
+            <li>The primary 12000 is killed. Orders sent to 12001 succeed: 12001 takes over as
+              primary, fails to reach 12000, and replicates to 12002. Dumps from 12001 and 12002
+              show the new orders.</li>
+          </ul>
+          <p class="dim">
+            Other heavy jobs were running on the laptop during this recording (load average around
+            30 to 60). In an earlier trial run of the same script on the same machine, with less
+            load, the first order run reached about 32,000 orders/s at about 0.25 ms average
+            latency.
+          </p>
+
+          <h2>Behaviour worth knowing</h2>
+          <ul>
+            <li>A backup applies an entry only when the next replication message raises the commit
+              index, so its copy of the most recent order lags by one. That is why the dump from a
+              backup can show <code>1998</code> for one customer while the primary has
+              <code>1999</code>.</li>
+            <li>When a backup takes over, the last entry it received from the old primary was never
+              marked committed, so that one order is not applied to the new primary's records.</li>
+            <li>Replication to the backups is sequential and happens inside the single admin thread.
+              Every order waits for all live backups, so order throughput is bounded by one round
+              trip per backup per order.</li>
+            <li>The client reports latencies in microseconds and throughput in requests per second,
+              measured over the whole run.</li>
+          </ul>
+
+          <h2>Exact commands</h2>
+          <p class="dim">
+            These are the commands the recording script ran, in order, starting in an empty
+            directory. The source is a fresh clone of the GitHub repository. The script is
+            <a href="https://github.com/darshpandya02/project-demos/blob/main/recording/factory.sh">recording/factory.sh</a>,
+            and it was recorded with
+            <code>asciinema rec --cols 110 --rows 32 -i 2 -c "bash recording/factory.sh"</code>.
+          </p>
+          <!-- commands:factory.sh -->
+        </div>
+      </section>
+    </main>
+
+    <footer class="status">
+      <div class="inner">
+        <span class="mode">NORMAL</span>
+        <span class="dim">recorded 2026-09-26 on a MacBook Air (Apple M5, 24 GB), macOS 26.5.2</span>
+        <span class="faint">│</span>
+        <a href="https://github.com/darshpandya02/BSDS">BSDS</a>
+        <a href="https://github.com/darshpandya02/project-demos">source of this site</a>
+      </div>
+    </footer>
+  </body>
+</html>

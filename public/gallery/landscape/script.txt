@@ -1,0 +1,55 @@
+load landscape/original.jpg landscape
+red-component landscape landscape-red-component
+save landscape/red-component.jpg landscape-red-component
+green-component landscape landscape-green-component
+save landscape/green-component.jpg landscape-green-component
+blue-component landscape landscape-blue-component
+save landscape/blue-component.jpg landscape-blue-component
+value-component landscape landscape-value-component
+save landscape/value-component.jpg landscape-value-component
+luma-component landscape landscape-luma-component
+save landscape/luma-component.jpg landscape-luma-component
+intensity-component landscape landscape-intensity-component
+save landscape/intensity-component.jpg landscape-intensity-component
+horizontal-flip landscape landscape-horizontal-flip
+save landscape/horizontal-flip.jpg landscape-horizontal-flip
+vertical-flip landscape landscape-vertical-flip
+save landscape/vertical-flip.jpg landscape-vertical-flip
+brighten 50 landscape landscape-brighten
+save landscape/brighten.jpg landscape-brighten
+brighten -50 landscape landscape-darken
+save landscape/darken.jpg landscape-darken
+rgb-split landscape landscape-r landscape-g landscape-b
+save landscape/rgb-split-r.jpg landscape-r
+save landscape/rgb-split-g.jpg landscape-g
+save landscape/rgb-split-b.jpg landscape-b
+horizontal-flip landscape landscape-hf
+rgb-split landscape-hf landscape-hf-r landscape-hf-g landscape-hf-b
+rgb-combine landscape-rgb-combine landscape-r landscape-hf-g landscape-b
+save landscape/rgb-combine.jpg landscape-rgb-combine
+blur landscape landscape-blur
+save landscape/blur.jpg landscape-blur
+sharpen landscape landscape-sharpen
+save landscape/sharpen.jpg landscape-sharpen
+sepia landscape landscape-sepia
+save landscape/sepia.jpg landscape-sepia
+histogram landscape landscape-histogram
+save landscape/histogram.jpg landscape-histogram
+color-correct landscape landscape-color-correct
+save landscape/color-correct.jpg landscape-color-correct
+levels-adjust 30 128 220 landscape landscape-levels-adjust
+save landscape/levels-adjust.jpg landscape-levels-adjust
+compress 50 landscape landscape-compress-50
+save landscape/compress-50.jpg landscape-compress-50
+compress 90 landscape landscape-compress-90
+save landscape/compress-90.jpg landscape-compress-90
+compress 98 landscape landscape-compress-98
+save landscape/compress-98.jpg landscape-compress-98
+blur landscape landscape-blur-split split 50
+save landscape/blur-split.jpg landscape-blur-split
+sepia landscape landscape-sepia-split split 50
+save landscape/sepia-split.jpg landscape-sepia-split
+luma-component landscape landscape-luma-split split 50
+save landscape/luma-split.jpg landscape-luma-split
+levels-adjust 30 128 220 landscape landscape-levels-split split 50
+save landscape/levels-split.jpg landscape-levels-split

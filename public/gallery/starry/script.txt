@@ -1,0 +1,55 @@
+load starry/original.jpg starry
+red-component starry starry-red-component
+save starry/red-component.jpg starry-red-component
+green-component starry starry-green-component
+save starry/green-component.jpg starry-green-component
+blue-component starry starry-blue-component
+save starry/blue-component.jpg starry-blue-component
+value-component starry starry-value-component
+save starry/value-component.jpg starry-value-component
+luma-component starry starry-luma-component
+save starry/luma-component.jpg starry-luma-component
+intensity-component starry starry-intensity-component
+save starry/intensity-component.jpg starry-intensity-component
+horizontal-flip starry starry-horizontal-flip
+save starry/horizontal-flip.jpg starry-horizontal-flip
+vertical-flip starry starry-vertical-flip
+save starry/vertical-flip.jpg starry-vertical-flip
+brighten 50 starry starry-brighten
+save starry/brighten.jpg starry-brighten
+brighten -50 starry starry-darken
+save starry/darken.jpg starry-darken
+rgb-split starry starry-r starry-g starry-b
+save starry/rgb-split-r.jpg starry-r
+save starry/rgb-split-g.jpg starry-g
+save starry/rgb-split-b.jpg starry-b
+horizontal-flip starry starry-hf
+rgb-split starry-hf starry-hf-r starry-hf-g starry-hf-b
+rgb-combine starry-rgb-combine starry-r starry-hf-g starry-b
+save starry/rgb-combine.jpg starry-rgb-combine
+blur starry starry-blur
+save starry/blur.jpg starry-blur
+sharpen starry starry-sharpen
+save starry/sharpen.jpg starry-sharpen
+sepia starry starry-sepia
+save starry/sepia.jpg starry-sepia
+histogram starry starry-histogram
+save starry/histogram.jpg starry-histogram
+color-correct starry starry-color-correct
+save starry/color-correct.jpg starry-color-correct
+levels-adjust 30 128 220 starry starry-levels-adjust
+save starry/levels-adjust.jpg starry-levels-adjust
+compress 50 starry starry-compress-50
+save starry/compress-50.jpg starry-compress-50
+compress 90 starry starry-compress-90
+save starry/compress-90.jpg starry-compress-90
+compress 98 starry starry-compress-98
+save starry/compress-98.jpg starry-compress-98
+blur starry starry-blur-split split 50
+save starry/blur-split.jpg starry-blur-split
+sepia starry starry-sepia-split split 50
+save starry/sepia-split.jpg starry-sepia-split
+luma-component starry starry-luma-split split 50
+save starry/luma-split.jpg starry-luma-split
+levels-adjust 30 128 220 starry starry-levels-split split 50
+save starry/levels-split.jpg starry-levels-split

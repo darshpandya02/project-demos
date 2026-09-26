@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b0e14" />
+    <title>raft-cluster-monitor demo — Darsh Pandya</title>
+    <meta name="description" content="Recorded session of raft-cluster-monitor: a 5-node Raft cluster in C++20, leader failover and fault injection." />
+    <script type="module" src="/src/main.js"></script>
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="/">darsh<span>@</span>demos <span>~</span></a>
+        <nav class="nav">
+          <a href="/">index</a>
+          <a href="/raft/" aria-current="page">raft</a>
+          <a href="/robot-factory/">robot-factory</a>
+          <a href="/image-processing/">image-processing</a>
+        </nav>
+        <a class="ext" href="https://github.com/darshpandya02/raft-cluster-monitor">source ↗</a>
+      </div>
+    </div>
+
+    <main>
+      <section class="window">
+        <header><div class="dots"><i></i><i></i><i></i></div><div class="title">darsh@demos — raft-cluster-monitor</div></header>
+        <div class="body">
+          <h1>raft-cluster-monitor</h1>
+          <p>
+            <span class="tag">C++20</span><span class="tag">Raft</span><span class="tag">POSIX sockets</span>
+          </p>
+          <p class="lead">
+            A Raft implementation in C++20 with no dependencies beyond the standard library and POSIX
+            sockets. The replicated state machine is a small key-value store plus a cluster-health
+            table. Every node is a separate <code>raftd</code> process and nodes talk over TCP with a
+            length-prefixed binary protocol. <code>raftctl</code> is the command-line client. It follows
+            redirects to the leader.
+          </p>
+          <p>
+            Source: <a href="https://github.com/darshpandya02/raft-cluster-monitor">github.com/darshpandya02/raft-cluster-monitor</a>
+          </p>
+        </div>
+      </section>
+
+      <section class="window">
+        <header><div class="dots"><i></i><i></i><i></i></div><div class="title">raft.cast — 110×32</div></header>
+        <div class="body flush">
+          <div class="player" data-cast="/casts/raft.cast" data-poster="npt:0:31"></div>
+        </div>
+      </section>
+
+      <section class="window">
+        <header><div class="dots"><i></i><i></i><i></i></div><div class="title">cat NOTES</div></header>
+        <div class="body">
+          <p class="meta">
+            <span><b>recorded</b> 2026-09-26, 12:35 EDT</span>
+            <span><b>machine</b> MacBook Air, Apple M5 (10 cores), 24 GB, macOS 26.5.2</span>
+            <span><b>toolchain</b> Apple clang 21.0.0, Python 3 (fault test only)</span>
+            <span><b>length</b> about 85 s (pauses longer than 2 s are shortened on playback)</span>
+          </p>
+
+          <h2>What the recording shows</h2>
+          <ul>
+            <li>A clean build with <code>make</code> and the 10 unit and in-process cluster tests passing.</li>
+            <li>Five <code>raftd</code> processes on ports 7200 to 7204. They elect a leader in term 1, and
+              <code>raftctl leader</code> shows every node agreeing on it.</li>
+            <li><code>put</code>/<code>get</code> and two health reports. All of them go through the log.
+              <code>status</code> shows the same commit index on all five nodes.</li>
+            <li>The leader is killed with <code>SIGKILL</code>. The nodes' event logs show a new
+              <code>ELECTION_START</code> about 113 ms after the kill and <code>BECAME_LEADER</code> in
+              term 2 about 119 ms after it. Your numbers will vary, because election timeouts are
+              randomized between 150 and 300 ms, counted from the last heartbeat.</li>
+            <li>The four surviving nodes still form a majority. A new write succeeds in term 2, the
+              earlier health reports are still there, and the killed node shows as
+              <code>unreachable</code>.</li>
+            <li>The killed node is restarted with the same data directory. It reloads its log from disk
+              and catches up to the same commit index as the others.</li>
+            <li>A short run of <code>tests/fault_injection.py</code>: 5 nodes with a client writing the
+              whole time. Each of 2 rounds kills and restarts the leader, pauses a follower, pauses the
+              leader until it is replaced, and kills a minority of nodes. All 6 safety and liveness
+              checks pass (17,787 acknowledged writes in 14 s).</li>
+          </ul>
+          <p class="dim">
+            Other heavy jobs were running on the laptop during this recording (load average around 50),
+            so the fault-test write count is lower than the numbers in the repository README.
+          </p>
+
+          <h2>Exact commands</h2>
+          <p class="dim">
+            These are the commands the recording script ran, in order. The prompt in the recording
+            shows only the current directory name, and each command's text is printed before it runs.
+            The script is
+            <a href="https://github.com/darshpandya02/project-demos/blob/main/recording/raft.sh">recording/raft.sh</a>,
+            and it was recorded with
+            <code>asciinema rec --cols 110 --rows 32 -i 2 -c "bash recording/raft.sh"</code>.
+          </p>
+          <!-- commands:raft.sh -->
+        </div>
+      </section>
+    </main>
+
+    <footer class="status">
+      <div class="inner">
+        <span class="mode">NORMAL</span>
+        <span class="dim">recorded 2026-09-26 on a MacBook Air (Apple M5, 24 GB), macOS 26.5.2</span>
+        <span class="faint">│</span>
+        <a href="https://github.com/darshpandya02/raft-cluster-monitor">raft-cluster-monitor</a>
+        <a href="https://github.com/darshpandya02/project-demos">source of this site</a>
+      </div>
+    </footer>
+  </body>
+</html>

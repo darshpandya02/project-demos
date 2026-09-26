@@ -1,0 +1,55 @@
+load macaw/original.jpg macaw
+red-component macaw macaw-red-component
+save macaw/red-component.jpg macaw-red-component
+green-component macaw macaw-green-component
+save macaw/green-component.jpg macaw-green-component
+blue-component macaw macaw-blue-component
+save macaw/blue-component.jpg macaw-blue-component
+value-component macaw macaw-value-component
+save macaw/value-component.jpg macaw-value-component
+luma-component macaw macaw-luma-component
+save macaw/luma-component.jpg macaw-luma-component
+intensity-component macaw macaw-intensity-component
+save macaw/intensity-component.jpg macaw-intensity-component
+horizontal-flip macaw macaw-horizontal-flip
+save macaw/horizontal-flip.jpg macaw-horizontal-flip
+vertical-flip macaw macaw-vertical-flip
+save macaw/vertical-flip.jpg macaw-vertical-flip
+brighten 50 macaw macaw-brighten
+save macaw/brighten.jpg macaw-brighten
+brighten -50 macaw macaw-darken
+save macaw/darken.jpg macaw-darken
+rgb-split macaw macaw-r macaw-g macaw-b
+save macaw/rgb-split-r.jpg macaw-r
+save macaw/rgb-split-g.jpg macaw-g
+save macaw/rgb-split-b.jpg macaw-b
+horizontal-flip macaw macaw-hf
+rgb-split macaw-hf macaw-hf-r macaw-hf-g macaw-hf-b
+rgb-combine macaw-rgb-combine macaw-r macaw-hf-g macaw-b
+save macaw/rgb-combine.jpg macaw-rgb-combine
+blur macaw macaw-blur
+save macaw/blur.jpg macaw-blur
+sharpen macaw macaw-sharpen
+save macaw/sharpen.jpg macaw-sharpen
+sepia macaw macaw-sepia
+save macaw/sepia.jpg macaw-sepia
+histogram macaw macaw-histogram
+save macaw/histogram.jpg macaw-histogram
+color-correct macaw macaw-color-correct
+save macaw/color-correct.jpg macaw-color-correct
+levels-adjust 30 128 220 macaw macaw-levels-adjust
+save macaw/levels-adjust.jpg macaw-levels-adjust
+compress 50 macaw macaw-compress-50
+save macaw/compress-50.jpg macaw-compress-50
+compress 90 macaw macaw-compress-90
+save macaw/compress-90.jpg macaw-compress-90
+compress 98 macaw macaw-compress-98
+save macaw/compress-98.jpg macaw-compress-98
+blur macaw macaw-blur-split split 50
+save macaw/blur-split.jpg macaw-blur-split
+sepia macaw macaw-sepia-split split 50
+save macaw/sepia-split.jpg macaw-sepia-split
+luma-component macaw macaw-luma-split split 50
+save macaw/luma-split.jpg macaw-luma-split
+levels-adjust 30 128 220 macaw macaw-levels-split split 50
+save macaw/levels-split.jpg macaw-levels-split

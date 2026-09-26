@@ -1,0 +1,20 @@
+{
+  "name": "project-demos",
+  "version": "1.0.0",
+  "description": "Recorded terminal demos of three projects, as a static site",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "author": "Darsh Pandya",
+  "type": "module",
+  "devDependencies": {
+    "vite": "^8.3.1"
+  },
+  "dependencies": {
+    "@fontsource/jetbrains-mono": "^5.3.0",
+    "asciinema-player": "^3.17.0"
+  },
+  "private": true
+}

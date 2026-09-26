@@ -1,0 +1,55 @@
+load earth/original.jpg earth
+red-component earth earth-red-component
+save earth/red-component.jpg earth-red-component
+green-component earth earth-green-component
+save earth/green-component.jpg earth-green-component
+blue-component earth earth-blue-component
+save earth/blue-component.jpg earth-blue-component
+value-component earth earth-value-component
+save earth/value-component.jpg earth-value-component
+luma-component earth earth-luma-component
+save earth/luma-component.jpg earth-luma-component
+intensity-component earth earth-intensity-component
+save earth/intensity-component.jpg earth-intensity-component
+horizontal-flip earth earth-horizontal-flip
+save earth/horizontal-flip.jpg earth-horizontal-flip
+vertical-flip earth earth-vertical-flip
+save earth/vertical-flip.jpg earth-vertical-flip
+brighten 50 earth earth-brighten
+save earth/brighten.jpg earth-brighten
+brighten -50 earth earth-darken
+save earth/darken.jpg earth-darken
+rgb-split earth earth-r earth-g earth-b
+save earth/rgb-split-r.jpg earth-r
+save earth/rgb-split-g.jpg earth-g
+save earth/rgb-split-b.jpg earth-b
+horizontal-flip earth earth-hf
+rgb-split earth-hf earth-hf-r earth-hf-g earth-hf-b
+rgb-combine earth-rgb-combine earth-r earth-hf-g earth-b
+save earth/rgb-combine.jpg earth-rgb-combine
+blur earth earth-blur
+save earth/blur.jpg earth-blur
+sharpen earth earth-sharpen
+save earth/sharpen.jpg earth-sharpen
+sepia earth earth-sepia
+save earth/sepia.jpg earth-sepia
+histogram earth earth-histogram
+save earth/histogram.jpg earth-histogram
+color-correct earth earth-color-correct
+save earth/color-correct.jpg earth-color-correct
+levels-adjust 30 128 220 earth earth-levels-adjust
+save earth/levels-adjust.jpg earth-levels-adjust
+compress 50 earth earth-compress-50
+save earth/compress-50.jpg earth-compress-50
+compress 90 earth earth-compress-90
+save earth/compress-90.jpg earth-compress-90
+compress 98 earth earth-compress-98
+save earth/compress-98.jpg earth-compress-98
+blur earth earth-blur-split split 50
+save earth/blur-split.jpg earth-blur-split
+sepia earth earth-sepia-split split 50
+save earth/sepia-split.jpg earth-sepia-split
+luma-component earth earth-luma-split split 50
+save earth/luma-split.jpg earth-luma-split
+levels-adjust 30 128 220 earth earth-levels-split split 50
+save earth/levels-split.jpg earth-levels-split

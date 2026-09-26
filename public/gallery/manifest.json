@@ -1,0 +1,1002 @@
+{
+  "operations": [
+    {
+      "id": "red-component",
+      "label": "red-component"
+    },
+    {
+      "id": "green-component",
+      "label": "green-component"
+    },
+    {
+      "id": "blue-component",
+      "label": "blue-component"
+    },
+    {
+      "id": "value-component",
+      "label": "value-component"
+    },
+    {
+      "id": "luma-component",
+      "label": "luma-component"
+    },
+    {
+      "id": "intensity-component",
+      "label": "intensity-component"
+    },
+    {
+      "id": "horizontal-flip",
+      "label": "horizontal-flip"
+    },
+    {
+      "id": "vertical-flip",
+      "label": "vertical-flip"
+    },
+    {
+      "id": "brighten",
+      "label": "brighten 50"
+    },
+    {
+      "id": "darken",
+      "label": "brighten -50"
+    },
+    {
+      "id": "rgb-split-r",
+      "label": "rgb-split (red)"
+    },
+    {
+      "id": "rgb-split-g",
+      "label": "rgb-split (green)"
+    },
+    {
+      "id": "rgb-split-b",
+      "label": "rgb-split (blue)"
+    },
+    {
+      "id": "rgb-combine",
+      "label": "rgb-combine (red + green of the flipped image + blue)"
+    },
+    {
+      "id": "blur",
+      "label": "blur"
+    },
+    {
+      "id": "sharpen",
+      "label": "sharpen"
+    },
+    {
+      "id": "sepia",
+      "label": "sepia"
+    },
+    {
+      "id": "histogram",
+      "label": "histogram"
+    },
+    {
+      "id": "color-correct",
+      "label": "color-correct"
+    },
+    {
+      "id": "levels-adjust",
+      "label": "levels-adjust 30 128 220"
+    },
+    {
+      "id": "compress-50",
+      "label": "compress 50"
+    },
+    {
+      "id": "compress-90",
+      "label": "compress 90"
+    },
+    {
+      "id": "compress-98",
+      "label": "compress 98"
+    },
+    {
+      "id": "blur-split",
+      "label": "blur, split 50"
+    },
+    {
+      "id": "sepia-split",
+      "label": "sepia, split 50"
+    },
+    {
+      "id": "luma-split",
+      "label": "luma-component, split 50"
+    },
+    {
+      "id": "levels-split",
+      "label": "levels-adjust 30 128 220, split 50"
+    }
+  ],
+  "images": [
+    {
+      "name": "earth",
+      "original": "earth/original.jpg",
+      "outputs": [
+        {
+          "id": "red-component",
+          "commands": [
+            "red-component earth earth-red-component",
+            "save earth/red-component.jpg earth-red-component"
+          ],
+          "file": "earth/red-component.jpg"
+        },
+        {
+          "id": "green-component",
+          "commands": [
+            "green-component earth earth-green-component",
+            "save earth/green-component.jpg earth-green-component"
+          ],
+          "file": "earth/green-component.jpg"
+        },
+        {
+          "id": "blue-component",
+          "commands": [
+            "blue-component earth earth-blue-component",
+            "save earth/blue-component.jpg earth-blue-component"
+          ],
+          "file": "earth/blue-component.jpg"
+        },
+        {
+          "id": "value-component",
+          "commands": [
+            "value-component earth earth-value-component",
+            "save earth/value-component.jpg earth-value-component"
+          ],
+          "file": "earth/value-component.jpg"
+        },
+        {
+          "id": "luma-component",
+          "commands": [
+            "luma-component earth earth-luma-component",
+            "save earth/luma-component.jpg earth-luma-component"
+          ],
+          "file": "earth/luma-component.jpg"
+        },
+        {
+          "id": "intensity-component",
+          "commands": [
+            "intensity-component earth earth-intensity-component",
+            "save earth/intensity-component.jpg earth-intensity-component"
+          ],
+          "file": "earth/intensity-component.jpg"
+        },
+        {
+          "id": "horizontal-flip",
+          "commands": [
+            "horizontal-flip earth earth-horizontal-flip",
+            "save earth/horizontal-flip.jpg earth-horizontal-flip"
+          ],
+          "file": "earth/horizontal-flip.jpg"
+        },
+        {
+          "id": "vertical-flip",
+          "commands": [
+            "vertical-flip earth earth-vertical-flip",
+            "save earth/vertical-flip.jpg earth-vertical-flip"
+          ],
+          "file": "earth/vertical-flip.jpg"
+        },
+        {
+          "id": "brighten",
+          "commands": [
+            "brighten 50 earth earth-brighten",
+            "save earth/brighten.jpg earth-brighten"
+          ],
+          "file": "earth/brighten.jpg"
+        },
+        {
+          "id": "darken",
+          "commands": [
+            "brighten -50 earth earth-darken",
+            "save earth/darken.jpg earth-darken"
+          ],
+          "file": "earth/darken.jpg"
+        },
+        {
+          "id": "rgb-split-r",
+          "commands": [
+            "rgb-split earth earth-r earth-g earth-b",
+            "save earth/rgb-split-r.jpg earth-r"
+          ],
+          "file": "earth/rgb-split-r.jpg"
+        },
+        {
+          "id": "rgb-split-g",
+          "commands": [
+            "save earth/rgb-split-g.jpg earth-g"
+          ],
+          "file": "earth/rgb-split-g.jpg"
+        },
+        {
+          "id": "rgb-split-b",
+          "commands": [
+            "save earth/rgb-split-b.jpg earth-b"
+          ],
+          "file": "earth/rgb-split-b.jpg"
+        },
+        {
+          "id": "rgb-combine",
+          "commands": [
+            "horizontal-flip earth earth-hf",
+            "rgb-split earth-hf earth-hf-r earth-hf-g earth-hf-b",
+            "rgb-combine earth-rgb-combine earth-r earth-hf-g earth-b",
+            "save earth/rgb-combine.jpg earth-rgb-combine"
+          ],
+          "file": "earth/rgb-combine.jpg"
+        },
+        {
+          "id": "blur",
+          "commands": [
+            "blur earth earth-blur",
+            "save earth/blur.jpg earth-blur"
+          ],
+          "file": "earth/blur.jpg"
+        },
+        {
+          "id": "sharpen",
+          "commands": [
+            "sharpen earth earth-sharpen",
+            "save earth/sharpen.jpg earth-sharpen"
+          ],
+          "file": "earth/sharpen.jpg"
+        },
+        {
+          "id": "sepia",
+          "commands": [
+            "sepia earth earth-sepia",
+            "save earth/sepia.jpg earth-sepia"
+          ],
+          "file": "earth/sepia.jpg"
+        },
+        {
+          "id": "histogram",
+          "commands": [
+            "histogram earth earth-histogram",
+            "save earth/histogram.jpg earth-histogram"
+          ],
+          "file": "earth/histogram.jpg"
+        },
+        {
+          "id": "color-correct",
+          "commands": [
+            "color-correct earth earth-color-correct",
+            "save earth/color-correct.jpg earth-color-correct"
+          ],
+          "file": "earth/color-correct.jpg"
+        },
+        {
+          "id": "levels-adjust",
+          "commands": [
+            "levels-adjust 30 128 220 earth earth-levels-adjust",
+            "save earth/levels-adjust.jpg earth-levels-adjust"
+          ],
+          "file": "earth/levels-adjust.jpg"
+        },
+        {
+          "id": "compress-50",
+          "commands": [
+            "compress 50 earth earth-compress-50",
+            "save earth/compress-50.jpg earth-compress-50"
+          ],
+          "file": "earth/compress-50.jpg"
+        },
+        {
+          "id": "compress-90",
+          "commands": [
+            "compress 90 earth earth-compress-90",
+            "save earth/compress-90.jpg earth-compress-90"
+          ],
+          "file": "earth/compress-90.jpg"
+        },
+        {
+          "id": "compress-98",
+          "commands": [
+            "compress 98 earth earth-compress-98",
+            "save earth/compress-98.jpg earth-compress-98"
+          ],
+          "file": "earth/compress-98.jpg"
+        },
+        {
+          "id": "blur-split",
+          "commands": [
+            "blur earth earth-blur-split split 50",
+            "save earth/blur-split.jpg earth-blur-split"
+          ],
+          "file": "earth/blur-split.jpg"
+        },
+        {
+          "id": "sepia-split",
+          "commands": [
+            "sepia earth earth-sepia-split split 50",
+            "save earth/sepia-split.jpg earth-sepia-split"
+          ],
+          "file": "earth/sepia-split.jpg"
+        },
+        {
+          "id": "luma-split",
+          "commands": [
+            "luma-component earth earth-luma-split split 50",
+            "save earth/luma-split.jpg earth-luma-split"
+          ],
+          "file": "earth/luma-split.jpg"
+        },
+        {
+          "id": "levels-split",
+          "commands": [
+            "levels-adjust 30 128 220 earth earth-levels-split split 50",
+            "save earth/levels-split.jpg earth-levels-split"
+          ],
+          "file": "earth/levels-split.jpg"
+        }
+      ]
+    },
+    {
+      "name": "landscape",
+      "original": "landscape/original.jpg",
+      "outputs": [
+        {
+          "id": "red-component",
+          "commands": [
+            "red-component landscape landscape-red-component",
+            "save landscape/red-component.jpg landscape-red-component"
+          ],
+          "file": "landscape/red-component.jpg"
+        },
+        {
+          "id": "green-component",
+          "commands": [
+            "green-component landscape landscape-green-component",
+            "save landscape/green-component.jpg landscape-green-component"
+          ],
+          "file": "landscape/green-component.jpg"
+        },
+        {
+          "id": "blue-component",
+          "commands": [
+            "blue-component landscape landscape-blue-component",
+            "save landscape/blue-component.jpg landscape-blue-component"
+          ],
+          "file": "landscape/blue-component.jpg"
+        },
+        {
+          "id": "value-component",
+          "commands": [
+            "value-component landscape landscape-value-component",
+            "save landscape/value-component.jpg landscape-value-component"
+          ],
+          "file": "landscape/value-component.jpg"
+        },
+        {
+          "id": "luma-component",
+          "commands": [
+            "luma-component landscape landscape-luma-component",
+            "save landscape/luma-component.jpg landscape-luma-component"
+          ],
+          "file": "landscape/luma-component.jpg"
+        },
+        {
+          "id": "intensity-component",
+          "commands": [
+            "intensity-component landscape landscape-intensity-component",
+            "save landscape/intensity-component.jpg landscape-intensity-component"
+          ],
+          "file": "landscape/intensity-component.jpg"
+        },
+        {
+          "id": "horizontal-flip",
+          "commands": [
+            "horizontal-flip landscape landscape-horizontal-flip",
+            "save landscape/horizontal-flip.jpg landscape-horizontal-flip"
+          ],
+          "file": "landscape/horizontal-flip.jpg"
+        },
+        {
+          "id": "vertical-flip",
+          "commands": [
+            "vertical-flip landscape landscape-vertical-flip",
+            "save landscape/vertical-flip.jpg landscape-vertical-flip"
+          ],
+          "file": "landscape/vertical-flip.jpg"
+        },
+        {
+          "id": "brighten",
+          "commands": [
+            "brighten 50 landscape landscape-brighten",
+            "save landscape/brighten.jpg landscape-brighten"
+          ],
+          "file": "landscape/brighten.jpg"
+        },
+        {
+          "id": "darken",
+          "commands": [
+            "brighten -50 landscape landscape-darken",
+            "save landscape/darken.jpg landscape-darken"
+          ],
+          "file": "landscape/darken.jpg"
+        },
+        {
+          "id": "rgb-split-r",
+          "commands": [
+            "rgb-split landscape landscape-r landscape-g landscape-b",
+            "save landscape/rgb-split-r.jpg landscape-r"
+          ],
+          "file": "landscape/rgb-split-r.jpg"
+        },
+        {
+          "id": "rgb-split-g",
+          "commands": [
+            "save landscape/rgb-split-g.jpg landscape-g"
+          ],
+          "file": "landscape/rgb-split-g.jpg"
+        },
+        {
+          "id": "rgb-split-b",
+          "commands": [
+            "save landscape/rgb-split-b.jpg landscape-b"
+          ],
+          "file": "landscape/rgb-split-b.jpg"
+        },
+        {
+          "id": "rgb-combine",
+          "commands": [
+            "horizontal-flip landscape landscape-hf",
+            "rgb-split landscape-hf landscape-hf-r landscape-hf-g landscape-hf-b",
+            "rgb-combine landscape-rgb-combine landscape-r landscape-hf-g landscape-b",
+            "save landscape/rgb-combine.jpg landscape-rgb-combine"
+          ],
+          "file": "landscape/rgb-combine.jpg"
+        },
+        {
+          "id": "blur",
+          "commands": [
+            "blur landscape landscape-blur",
+            "save landscape/blur.jpg landscape-blur"
+          ],
+          "file": "landscape/blur.jpg"
+        },
+        {
+          "id": "sharpen",
+          "commands": [
+            "sharpen landscape landscape-sharpen",
+            "save landscape/sharpen.jpg landscape-sharpen"
+          ],
+          "file": "landscape/sharpen.jpg"
+        },
+        {
+          "id": "sepia",
+          "commands": [
+            "sepia landscape landscape-sepia",
+            "save landscape/sepia.jpg landscape-sepia"
+          ],
+          "file": "landscape/sepia.jpg"
+        },
+        {
+          "id": "histogram",
+          "commands": [
+            "histogram landscape landscape-histogram",
+            "save landscape/histogram.jpg landscape-histogram"
+          ],
+          "file": "landscape/histogram.jpg"
+        },
+        {
+          "id": "color-correct",
+          "commands": [
+            "color-correct landscape landscape-color-correct",
+            "save landscape/color-correct.jpg landscape-color-correct"
+          ],
+          "file": "landscape/color-correct.jpg"
+        },
+        {
+          "id": "levels-adjust",
+          "commands": [
+            "levels-adjust 30 128 220 landscape landscape-levels-adjust",
+            "save landscape/levels-adjust.jpg landscape-levels-adjust"
+          ],
+          "file": "landscape/levels-adjust.jpg"
+        },
+        {
+          "id": "compress-50",
+          "commands": [
+            "compress 50 landscape landscape-compress-50",
+            "save landscape/compress-50.jpg landscape-compress-50"
+          ],
+          "file": "landscape/compress-50.jpg"
+        },
+        {
+          "id": "compress-90",
+          "commands": [
+            "compress 90 landscape landscape-compress-90",
+            "save landscape/compress-90.jpg landscape-compress-90"
+          ],
+          "file": "landscape/compress-90.jpg"
+        },
+        {
+          "id": "compress-98",
+          "commands": [
+            "compress 98 landscape landscape-compress-98",
+            "save landscape/compress-98.jpg landscape-compress-98"
+          ],
+          "file": "landscape/compress-98.jpg"
+        },
+        {
+          "id": "blur-split",
+          "commands": [
+            "blur landscape landscape-blur-split split 50",
+            "save landscape/blur-split.jpg landscape-blur-split"
+          ],
+          "file": "landscape/blur-split.jpg"
+        },
+        {
+          "id": "sepia-split",
+          "commands": [
+            "sepia landscape landscape-sepia-split split 50",
+            "save landscape/sepia-split.jpg landscape-sepia-split"
+          ],
+          "file": "landscape/sepia-split.jpg"
+        },
+        {
+          "id": "luma-split",
+          "commands": [
+            "luma-component landscape landscape-luma-split split 50",
+            "save landscape/luma-split.jpg landscape-luma-split"
+          ],
+          "file": "landscape/luma-split.jpg"
+        },
+        {
+          "id": "levels-split",
+          "commands": [
+            "levels-adjust 30 128 220 landscape landscape-levels-split split 50",
+            "save landscape/levels-split.jpg landscape-levels-split"
+          ],
+          "file": "landscape/levels-split.jpg"
+        }
+      ]
+    },
+    {
+      "name": "macaw",
+      "original": "macaw/original.jpg",
+      "outputs": [
+        {
+          "id": "red-component",
+          "commands": [
+            "red-component macaw macaw-red-component",
+            "save macaw/red-component.jpg macaw-red-component"
+          ],
+          "file": "macaw/red-component.jpg"
+        },
+        {
+          "id": "green-component",
+          "commands": [
+            "green-component macaw macaw-green-component",
+            "save macaw/green-component.jpg macaw-green-component"
+          ],
+          "file": "macaw/green-component.jpg"
+        },
+        {
+          "id": "blue-component",
+          "commands": [
+            "blue-component macaw macaw-blue-component",
+            "save macaw/blue-component.jpg macaw-blue-component"
+          ],
+          "file": "macaw/blue-component.jpg"
+        },
+        {
+          "id": "value-component",
+          "commands": [
+            "value-component macaw macaw-value-component",
+            "save macaw/value-component.jpg macaw-value-component"
+          ],
+          "file": "macaw/value-component.jpg"
+        },
+        {
+          "id": "luma-component",
+          "commands": [
+            "luma-component macaw macaw-luma-component",
+            "save macaw/luma-component.jpg macaw-luma-component"
+          ],
+          "file": "macaw/luma-component.jpg"
+        },
+        {
+          "id": "intensity-component",
+          "commands": [
+            "intensity-component macaw macaw-intensity-component",
+            "save macaw/intensity-component.jpg macaw-intensity-component"
+          ],
+          "file": "macaw/intensity-component.jpg"
+        },
+        {
+          "id": "horizontal-flip",
+          "commands": [
+            "horizontal-flip macaw macaw-horizontal-flip",
+            "save macaw/horizontal-flip.jpg macaw-horizontal-flip"
+          ],
+          "file": "macaw/horizontal-flip.jpg"
+        },
+        {
+          "id": "vertical-flip",
+          "commands": [
+            "vertical-flip macaw macaw-vertical-flip",
+            "save macaw/vertical-flip.jpg macaw-vertical-flip"
+          ],
+          "file": "macaw/vertical-flip.jpg"
+        },
+        {
+          "id": "brighten",
+          "commands": [
+            "brighten 50 macaw macaw-brighten",
+            "save macaw/brighten.jpg macaw-brighten"
+          ],
+          "file": "macaw/brighten.jpg"
+        },
+        {
+          "id": "darken",
+          "commands": [
+            "brighten -50 macaw macaw-darken",
+            "save macaw/darken.jpg macaw-darken"
+          ],
+          "file": "macaw/darken.jpg"
+        },
+        {
+          "id": "rgb-split-r",
+          "commands": [
+            "rgb-split macaw macaw-r macaw-g macaw-b",
+            "save macaw/rgb-split-r.jpg macaw-r"
+          ],
+          "file": "macaw/rgb-split-r.jpg"
+        },
+        {
+          "id": "rgb-split-g",
+          "commands": [
+            "save macaw/rgb-split-g.jpg macaw-g"
+          ],
+          "file": "macaw/rgb-split-g.jpg"
+        },
+        {
+          "id": "rgb-split-b",
+          "commands": [
+            "save macaw/rgb-split-b.jpg macaw-b"
+          ],
+          "file": "macaw/rgb-split-b.jpg"
+        },
+        {
+          "id": "rgb-combine",
+          "commands": [
+            "horizontal-flip macaw macaw-hf",
+            "rgb-split macaw-hf macaw-hf-r macaw-hf-g macaw-hf-b",
+            "rgb-combine macaw-rgb-combine macaw-r macaw-hf-g macaw-b",
+            "save macaw/rgb-combine.jpg macaw-rgb-combine"
+          ],
+          "file": "macaw/rgb-combine.jpg"
+        },
+        {
+          "id": "blur",
+          "commands": [
+            "blur macaw macaw-blur",
+            "save macaw/blur.jpg macaw-blur"
+          ],
+          "file": "macaw/blur.jpg"
+        },
+        {
+          "id": "sharpen",
+          "commands": [
+            "sharpen macaw macaw-sharpen",
+            "save macaw/sharpen.jpg macaw-sharpen"
+          ],
+          "file": "macaw/sharpen.jpg"
+        },
+        {
+          "id": "sepia",
+          "commands": [
+            "sepia macaw macaw-sepia",
+            "save macaw/sepia.jpg macaw-sepia"
+          ],
+          "file": "macaw/sepia.jpg"
+        },
+        {
+          "id": "histogram",
+          "commands": [
+            "histogram macaw macaw-histogram",
+            "save macaw/histogram.jpg macaw-histogram"
+          ],
+          "file": "macaw/histogram.jpg"
+        },
+        {
+          "id": "color-correct",
+          "commands": [
+            "color-correct macaw macaw-color-correct",
+            "save macaw/color-correct.jpg macaw-color-correct"
+          ],
+          "file": "macaw/color-correct.jpg"
+        },
+        {
+          "id": "levels-adjust",
+          "commands": [
+            "levels-adjust 30 128 220 macaw macaw-levels-adjust",
+            "save macaw/levels-adjust.jpg macaw-levels-adjust"
+          ],
+          "file": "macaw/levels-adjust.jpg"
+        },
+        {
+          "id": "compress-50",
+          "commands": [
+            "compress 50 macaw macaw-compress-50",
+            "save macaw/compress-50.jpg macaw-compress-50"
+          ],
+          "file": "macaw/compress-50.jpg"
+        },
+        {
+          "id": "compress-90",
+          "commands": [
+            "compress 90 macaw macaw-compress-90",
+            "save macaw/compress-90.jpg macaw-compress-90"
+          ],
+          "file": "macaw/compress-90.jpg"
+        },
+        {
+          "id": "compress-98",
+          "commands": [
+            "compress 98 macaw macaw-compress-98",
+            "save macaw/compress-98.jpg macaw-compress-98"
+          ],
+          "file": "macaw/compress-98.jpg"
+        },
+        {
+          "id": "blur-split",
+          "commands": [
+            "blur macaw macaw-blur-split split 50",
+            "save macaw/blur-split.jpg macaw-blur-split"
+          ],
+          "file": "macaw/blur-split.jpg"
+        },
+        {
+          "id": "sepia-split",
+          "commands": [
+            "sepia macaw macaw-sepia-split split 50",
+            "save macaw/sepia-split.jpg macaw-sepia-split"
+          ],
+          "file": "macaw/sepia-split.jpg"
+        },
+        {
+          "id": "luma-split",
+          "commands": [
+            "luma-component macaw macaw-luma-split split 50",
+            "save macaw/luma-split.jpg macaw-luma-split"
+          ],
+          "file": "macaw/luma-split.jpg"
+        },
+        {
+          "id": "levels-split",
+          "commands": [
+            "levels-adjust 30 128 220 macaw macaw-levels-split split 50",
+            "save macaw/levels-split.jpg macaw-levels-split"
+          ],
+          "file": "macaw/levels-split.jpg"
+        }
+      ]
+    },
+    {
+      "name": "starry",
+      "original": "starry/original.jpg",
+      "outputs": [
+        {
+          "id": "red-component",
+          "commands": [
+            "red-component starry starry-red-component",
+            "save starry/red-component.jpg starry-red-component"
+          ],
+          "file": "starry/red-component.jpg"
+        },
+        {
+          "id": "green-component",
+          "commands": [
+            "green-component starry starry-green-component",
+            "save starry/green-component.jpg starry-green-component"
+          ],
+          "file": "starry/green-component.jpg"
+        },
+        {
+          "id": "blue-component",
+          "commands": [
+            "blue-component starry starry-blue-component",
+            "save starry/blue-component.jpg starry-blue-component"
+          ],
+          "file": "starry/blue-component.jpg"
+        },
+        {
+          "id": "value-component",
+          "commands": [
+            "value-component starry starry-value-component",
+            "save starry/value-component.jpg starry-value-component"
+          ],
+          "file": "starry/value-component.jpg"
+        },
+        {
+          "id": "luma-component",
+          "commands": [
+            "luma-component starry starry-luma-component",
+            "save starry/luma-component.jpg starry-luma-component"
+          ],
+          "file": "starry/luma-component.jpg"
+        },
+        {
+          "id": "intensity-component",
+          "commands": [
+            "intensity-component starry starry-intensity-component",
+            "save starry/intensity-component.jpg starry-intensity-component"
+          ],
+          "file": "starry/intensity-component.jpg"
+        },
+        {
+          "id": "horizontal-flip",
+          "commands": [
+            "horizontal-flip starry starry-horizontal-flip",
+            "save starry/horizontal-flip.jpg starry-horizontal-flip"
+          ],
+          "file": "starry/horizontal-flip.jpg"
+        },
+        {
+          "id": "vertical-flip",
+          "commands": [
+            "vertical-flip starry starry-vertical-flip",
+            "save starry/vertical-flip.jpg starry-vertical-flip"
+          ],
+          "file": "starry/vertical-flip.jpg"
+        },
+        {
+          "id": "brighten",
+          "commands": [
+            "brighten 50 starry starry-brighten",
+            "save starry/brighten.jpg starry-brighten"
+          ],
+          "file": "starry/brighten.jpg"
+        },
+        {
+          "id": "darken",
+          "commands": [
+            "brighten -50 starry starry-darken",
+            "save starry/darken.jpg starry-darken"
+          ],
+          "file": "starry/darken.jpg"
+        },
+        {
+          "id": "rgb-split-r",
+          "commands": [
+            "rgb-split starry starry-r starry-g starry-b",
+            "save starry/rgb-split-r.jpg starry-r"
+          ],
+          "file": "starry/rgb-split-r.jpg"
+        },
+        {
+          "id": "rgb-split-g",
+          "commands": [
+            "save starry/rgb-split-g.jpg starry-g"
+          ],
+          "file": "starry/rgb-split-g.jpg"
+        },
+        {
+          "id": "rgb-split-b",
+          "commands": [
+            "save starry/rgb-split-b.jpg starry-b"
+          ],
+          "file": "starry/rgb-split-b.jpg"
+        },
+        {
+          "id": "rgb-combine",
+          "commands": [
+            "horizontal-flip starry starry-hf",
+            "rgb-split starry-hf starry-hf-r starry-hf-g starry-hf-b",
+            "rgb-combine starry-rgb-combine starry-r starry-hf-g starry-b",
+            "save starry/rgb-combine.jpg starry-rgb-combine"
+          ],
+          "file": "starry/rgb-combine.jpg"
+        },
+        {
+          "id": "blur",
+          "commands": [
+            "blur starry starry-blur",
+            "save starry/blur.jpg starry-blur"
+          ],
+          "file": "starry/blur.jpg"
+        },
+        {
+          "id": "sharpen",
+          "commands": [
+            "sharpen starry starry-sharpen",
+            "save starry/sharpen.jpg starry-sharpen"
+          ],
+          "file": "starry/sharpen.jpg"
+        },
+        {
+          "id": "sepia",
+          "commands": [
+            "sepia starry starry-sepia",
+            "save starry/sepia.jpg starry-sepia"
+          ],
+          "file": "starry/sepia.jpg"
+        },
+        {
+          "id": "histogram",
+          "commands": [
+            "histogram starry starry-histogram",
+            "save starry/histogram.jpg starry-histogram"
+          ],
+          "file": "starry/histogram.jpg"
+        },
+        {
+          "id": "color-correct",
+          "commands": [
+            "color-correct starry starry-color-correct",
+            "save starry/color-correct.jpg starry-color-correct"
+          ],
+          "file": "starry/color-correct.jpg"
+        },
+        {
+          "id": "levels-adjust",
+          "commands": [
+            "levels-adjust 30 128 220 starry starry-levels-adjust",
+            "save starry/levels-adjust.jpg starry-levels-adjust"
+          ],
+          "file": "starry/levels-adjust.jpg"
+        },
+        {
+          "id": "compress-50",
+          "commands": [
+            "compress 50 starry starry-compress-50",
+            "save starry/compress-50.jpg starry-compress-50"
+          ],
+          "file": "starry/compress-50.jpg"
+        },
+        {
+          "id": "compress-90",
+          "commands": [
+            "compress 90 starry starry-compress-90",
+            "save starry/compress-90.jpg starry-compress-90"
+          ],
+          "file": "starry/compress-90.jpg"
+        },
+        {
+          "id": "compress-98",
+          "commands": [
+            "compress 98 starry starry-compress-98",
+            "save starry/compress-98.jpg starry-compress-98"
+          ],
+          "file": "starry/compress-98.jpg"
+        },
+        {
+          "id": "blur-split",
+          "commands": [
+            "blur starry starry-blur-split split 50",
+            "save starry/blur-split.jpg starry-blur-split"
+          ],
+          "file": "starry/blur-split.jpg"
+        },
+        {
+          "id": "sepia-split",
+          "commands": [
+            "sepia starry starry-sepia-split split 50",
+            "save starry/sepia-split.jpg starry-sepia-split"
+          ],
+          "file": "starry/sepia-split.jpg"
+        },
+        {
+          "id": "luma-split",
+          "commands": [
+            "luma-component starry starry-luma-split split 50",
+            "save starry/luma-split.jpg starry-luma-split"
+          ],
+          "file": "starry/luma-split.jpg"
+        },
+        {
+          "id": "levels-split",
+          "commands": [
+            "levels-adjust 30 128 220 starry starry-levels-split split 50",
+            "save starry/levels-split.jpg starry-levels-split"
+          ],
+          "file": "starry/levels-split.jpg"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b0e14" />
+    <title>Project demos — Darsh Pandya</title>
+    <meta name="description" content="Recorded terminal sessions of three command-line and desktop projects by Darsh Pandya: a Raft cluster, a primary-backup robot factory, and a Java image processor." />
+    <script type="module" src="/src/main.js"></script>
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="/">darsh<span>@</span>demos <span>~</span></a>
+        <nav class="nav">
+          <a href="/" aria-current="page">index</a>
+          <a href="/raft/">raft</a>
+          <a href="/robot-factory/">robot-factory</a>
+          <a href="/image-processing/">image-processing</a>
+        </nav>
+        <a class="ext" href="https://darshpandya.vercel.app">portfolio ↗</a>
+      </div>
+    </div>
+
+    <main>
+      <section class="window">
+        <header><div class="dots"><i></i><i></i><i></i></div><div class="title">darsh@demos — cat README</div></header>
+        <div class="body">
+          <h1>Project demos</h1>
+          <p class="lead">
+            Three of my projects are command-line or desktop programs, so there is nothing to click on.
+            This site plays back real terminal sessions of them instead. Each session was recorded
+            with <a href="https://asciinema.org">asciinema</a> on my laptop, running the code from the
+            public repositories. The output has not been edited. The gallery images are the
+            program's own output files.
+          </p>
+          <p class="dim">
+            The site is fully static. Nothing runs on a server: the players replay recorded
+            <code>.cast</code> files, and the gallery shows pre-computed images.
+          </p>
+        </div>
+      </section>
+
+      <div class="cards">
+        <a class="card" href="/raft/">
+          <span class="path">~/raft/</span>
+          <h3>raft-cluster-monitor</h3>
+          <p>Raft consensus in C++20, written from scratch. A 5-node cluster: writes, reads, killing the leader, re-election, catch-up after a restart, then a fault-injection run.</p>
+        </a>
+        <a class="card" href="/robot-factory/">
+          <span class="path">~/robot-factory/</span>
+          <h3>BSDS PA3: robot factory</h3>
+          <p>A primary-backup replicated C++ service over raw TCP sockets. Client load with latency and throughput, a backup killed and brought back, then the primary killed.</p>
+        </a>
+        <a class="card" href="/image-processing/">
+          <span class="path">~/image-processing/</span>
+          <h3>image-processing-application</h3>
+          <p>A Java MVC image editor, run through its text and script mode. Includes a before/after gallery of every operation on four sample images.</p>
+        </a>
+      </div>
+    </main>
+
+    <footer class="status">
+      <div class="inner">
+        <span class="mode">NORMAL</span>
+        <span class="dim">recorded 2026-09-26 on a MacBook Air (Apple M5, 24 GB), macOS 26.5.2</span>
+        <span class="faint">│</span>
+        <a href="https://github.com/darshpandya02/project-demos">source of this site</a>
+        <a href="https://github.com/darshpandya02">github</a>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b0e14" />
+    <title>image-processing-application demo — Darsh Pandya</title>
+    <meta name="description" content="Recorded session and before/after gallery of image-processing-application, a Java MVC image editor with text and script modes." />
+    <script type="module" src="/src/main.js"></script>
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="/">darsh<span>@</span>demos <span>~</span></a>
+        <nav class="nav">
+          <a href="/">index</a>
+          <a href="/raft/">raft</a>
+          <a href="/robot-factory/">robot-factory</a>
+          <a href="/image-processing/" aria-current="page">image-processing</a>
+        </nav>
+        <a class="ext" href="https://github.com/darshpandya02/image-processing-application">source ↗</a>
+      </div>
+    </div>
+
+    <main>
+      <section class="window">
+        <header><div class="dots"><i></i><i></i><i></i></div><div class="title">darsh@demos — image-processing-application</div></header>
+        <div class="body">
+          <h1>image-processing-application</h1>
+          <p>
+            <span class="tag">Java</span><span class="tag">MVC</span><span class="tag">Swing</span>
+          </p>
+          <p class="lead">
+            An image editor in plain Java, with no libraries beyond the JDK. It follows a
+            model-view-controller design. Images are loaded into a model under a name, operations
+            create new named images, and <code>save</code> writes PNG, JPG or plain-text PPM. There
+            are three front ends: a Swing GUI (no arguments), a text mode (<code>-text</code>) that
+            reads commands from standard input, and a script mode. Script mode is the
+            <code>run FILE</code> command, or <code>-file FILE</code>, which opens the GUI.
+          </p>
+          <p>
+            The operations are the red, green, blue, value, luma and intensity components,
+            horizontal and vertical flips, brighten or darken, RGB split and combine, blur, sharpen,
+            sepia, histogram, color correction, levels adjustment and Haar-wavelet compression.
+            Most filters also take <code>split P</code>, which applies the filter to only the left
+            P percent of the image for a side-by-side preview.
+          </p>
+          <p>
+            Source: <a href="https://github.com/darshpandya02/image-processing-application">github.com/darshpandya02/image-processing-application</a>
+          </p>
+        </div>
+      </section>
+
+      <section class="window">
+        <header><div class="dots"><i></i><i></i><i></i></div><div class="title">image-processing.cast — 110×32</div></header>
+        <div class="body flush">
+          <div class="player" data-cast="/casts/image-processing.cast" data-poster="npt:0:40"></div>
+        </div>
+      </section>
+
+      <section class="window">
+        <header><div class="dots"><i></i><i></i><i></i></div><div class="title">cat NOTES</div></header>
+        <div class="body">
+          <p class="meta">
+            <span><b>recorded</b> 2026-09-26, 12:32 EDT</span>
+            <span><b>machine</b> MacBook Air, Apple M5 (10 cores), 24 GB, macOS 26.5.2</span>
+            <span><b>toolchain</b> OpenJDK 17.0.20 (Homebrew)</span>
+            <span><b>length</b> about 70 s (pauses longer than 2 s are shortened on playback)</span>
+          </p>
+
+          <h2>What the recording shows</h2>
+          <ul>
+            <li>A fresh clone compiled with <code>javac</code>, giving 13 classes.</li>
+            <li>The start of the <code>help</code> text, printed by the text controller.</li>
+            <li>A 25-line script that loads the sample image from <code>res/</code>, applies 12
+              operations (including a split-view sepia), and saves the results as PNG, JPG and PPM.
+              It runs through <code>run</code> in text mode, so no window opens. The outputs are
+              then listed, and <code>file</code> confirms their formats and sizes (the histogram is
+              256×256).</li>
+            <li>The repository's own <code>res/commands.txt</code> (155 lines, 80 saves). It covers
+              every operation on the PNG, JPG and PPM copies of the sample and takes about 23 s.</li>
+            <li>Error handling: a missing file and an unknown image name each print an error, and the
+              session carries on.</li>
+          </ul>
+          <p class="dim">
+            Before this recording, <code>res/commands.txt</code> used an image called
+            <code>input</code> without loading it first, so the script stopped at the first
+            <code>compress</code>. It now loads <code>res/input.jpg</code> as <code>input</code>, the
+            same way <code>res/jarCommand.txt</code> does
+            (<a href="https://github.com/darshpandya02/image-processing-application/commit/290b78894962664c9ab96bccf874bb4b645f9415">commit 290b788</a>).
+          </p>
+
+          <h2>Exact commands</h2>
+          <p class="dim">
+            These are the commands the recording script ran, in order, starting in an empty
+            directory. The script is
+            <a href="https://github.com/darshpandya02/project-demos/blob/main/recording/imageapp.sh">recording/imageapp.sh</a>,
+            and it was recorded with
+            <code>asciinema rec --cols 110 --rows 32 -i 2 -c "bash recording/imageapp.sh"</code>.
+          </p>
+          <!-- commands:imageapp.sh -->
+        </div>
+      </section>
+
+      <section class="window" id="gallery">
+        <header><div class="dots"><i></i><i></i><i></i></div><div class="title">ls gallery/ — before and after</div></header>
+        <div class="body">
+          <h2>Gallery</h2>
+          <p>
+            Every operation, run by the application itself on four sample images. For each image,
+            <a href="https://github.com/darshpandya02/project-demos/blob/main/recording/gallery.py">recording/gallery.py</a>
+            writes a script of commands. It feeds the script to <code>java Main -text</code> with
+            <code>run</code> and shows the JPG files the program saved. Nothing was retouched. Each
+            caption lists the commands that produced the image. The inputs were first scaled down
+            to 640 px on the long side with macOS <code>sips</code>, to keep the page light.
+          </p>
+          <div class="gallery-controls" role="group" aria-label="sample image"></div>
+          <p class="source"></p>
+          <div class="grid"></div>
+          <noscript><p class="dim">The gallery needs JavaScript. The images are also in <code>/gallery/</code>.</p></noscript>
+        </div>
+      </section>
+    </main>
+
+    <script type="application/json" id="credits">
+      {
+        "earth": {
+          "title": "Earth (Apollo 17)",
+          "html": "<a href=\"https://commons.wikimedia.org/wiki/File:The_Earth_seen_from_Apollo_17.jpg\">The Earth seen from Apollo 17</a>, NASA / Apollo 17 crew, 1972. Public domain (work of NASA), via Wikimedia Commons."
+        },
+        "landscape": {
+          "title": "Landscape (repo sample)",
+          "html": "<code>res/input.png</code> from the <a href=\"https://github.com/darshpandya02/image-processing-application\">image-processing-application</a> repository, the sample image that ships with the project and is used in the recording."
+        },
+        "macaw": {
+          "title": "Red macaw",
+          "html": "<a href=\"https://commons.wikimedia.org/wiki/File:Parrot.red.macaw.1.arp.750pix.jpg\">Parrot.red.macaw.1.arp.750pix.jpg</a>, photo by Adrian Pingstone (Arpingstone). Released into the public domain by the author, via Wikimedia Commons."
+        },
+        "starry": {
+          "title": "Starry Night Over the Rhône",
+          "html": "<a href=\"https://commons.wikimedia.org/wiki/File:Vincent_van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg\">Starry Night Over the Rhône</a> (La Nuit étoilée), Vincent van Gogh, 1888 (Google Art Project scan). Public domain, via Wikimedia Commons."
+        }
+      }
+    </script>
+
+    <footer class="status">
+      <div class="inner">
+        <span class="mode">NORMAL</span>
+        <span class="dim">recorded 2026-09-26 on a MacBook Air (Apple M5, 24 GB), macOS 26.5.2</span>
+        <span class="faint">│</span>
+        <a href="https://github.com/darshpandya02/image-processing-application">image-processing-application</a>
+        <a href="https://github.com/darshpandya02/project-demos">source of this site</a>
+      </div>
+    </footer>
+  </body>
+</html>
