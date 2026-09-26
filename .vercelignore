@@ -1,0 +1,4 @@
+.work
+.env*
+dist
+node_modules

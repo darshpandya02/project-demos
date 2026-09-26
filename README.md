@@ -1,13 +1,13 @@
 # project-demos
 
 Recorded terminal demos of three of my command-line and desktop projects, served as a
-static site: https://project-demos.vercel.app
+static site: https://project-demos-gamma.vercel.app
 
 | Page | Project |
 |---|---|
-| [/raft/](https://project-demos.vercel.app/raft/) | [raft-cluster-monitor](https://github.com/darshpandya02/raft-cluster-monitor): Raft in C++20. A 5-node cluster, leader failover and fault injection |
-| [/robot-factory/](https://project-demos.vercel.app/robot-factory/) | [BSDS PA3](https://github.com/darshpandya02/BSDS/tree/main/PA3/factory_src): a primary-backup robot factory over TCP |
-| [/image-processing/](https://project-demos.vercel.app/image-processing/) | [image-processing-application](https://github.com/darshpandya02/image-processing-application): a Java image editor, plus a before/after gallery |
+| [/raft/](https://project-demos-gamma.vercel.app/raft/) | [raft-cluster-monitor](https://github.com/darshpandya02/raft-cluster-monitor): Raft in C++20. A 5-node cluster, leader failover and fault injection |
+| [/robot-factory/](https://project-demos-gamma.vercel.app/robot-factory/) | [BSDS PA3](https://github.com/darshpandya02/BSDS/tree/main/PA3/factory_src): a primary-backup robot factory over TCP |
+| [/image-processing/](https://project-demos-gamma.vercel.app/image-processing/) | [image-processing-application](https://github.com/darshpandya02/image-processing-application): a Java image editor, plus a before/after gallery |
 
 Nothing runs on a server. The players replay asciicast v2 recordings in `public/casts/`
 using a bundled [asciinema-player](https://github.com/asciinema/asciinema-player), and the
