@@ -13,7 +13,7 @@ from playwright.sync_api import sync_playwright
 
 BASE = sys.argv[1].rstrip("/")
 SHOTS = sys.argv[2] if len(sys.argv) > 2 else None
-PAGES = ["/raft/", "/robot-factory/", "/image-processing/"]
+PAGES = ["/raft/", "/robot-factory/", "/image-processing/", "/meditrack/"]
 
 failures = []
 
@@ -71,6 +71,23 @@ with sync_playwright() as p:
                       f"gallery '{buttons.nth(i).inner_text()}': {count} images, {len(broken)} broken")
             if SHOTS:
                 page.locator("#gallery").screenshot(path=f"{SHOTS}/gallery.png")
+
+        if path == "/meditrack/":
+            video = page.locator("video").first
+            video.scroll_into_view_if_needed()
+            page.evaluate("document.querySelector('video').muted = true; document.querySelector('video').play()")
+            page.wait_for_function("document.querySelector('video').readyState >= 2", timeout=30000)
+            time.sleep(2)
+            v = page.evaluate("(() => { const v = document.querySelector('video');"
+                              " return {t: v.currentTime, d: v.duration, w: v.videoWidth, h: v.videoHeight, err: v.error && v.error.code}; })()")
+            check(not v["err"] and v["d"] > 60 and v["w"] == 1280 and v["t"] > 0.5,
+                  f"/meditrack/ video loads and plays ({v['w']}x{v['h']}, {v['d']:.1f}s, at {v['t']:.1f}s)")
+            shots = page.locator(".shots img")
+            for j in range(shots.count()):
+                shots.nth(j).scroll_into_view_if_needed()
+            page.wait_for_function("[...document.querySelectorAll('.shots img')].every(i => i.complete)", timeout=30000)
+            broken = page.evaluate("[...document.querySelectorAll('.shots img')].filter(i => !(i.naturalWidth > 0)).length")
+            check(shots.count() == 10 and broken == 0, f"/meditrack/ screenshots: {shots.count()} images, {broken} broken")
 
     check(not errors, f"no page errors ({errors[:3]})")
     browser.close()

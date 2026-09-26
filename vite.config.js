@@ -35,6 +35,7 @@ export default defineConfig({
         raft: page("raft/index.html"),
         factory: page("robot-factory/index.html"),
         image: page("image-processing/index.html"),
+        meditrack: page("meditrack/index.html"),
       },
     },
   },

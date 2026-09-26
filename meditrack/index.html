@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b0e14" />
+    <title>MediTrack demo — Darsh Pandya</title>
+    <meta name="description" content="Recorded walkthrough of MediTrack, a medical inventory system in ASP.NET Core and EF Core: FEFO issuing, role-based access with Identity and JWT, and optimistic concurrency, plus a recording of its test suite." />
+    <script type="module" src="/src/main.js"></script>
+    <style>
+      .video { display: block; width: 100%; height: auto; background: #000; border-radius: 0 0 6px 6px; }
+      .shots { grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr)); }
+      .shots a { display: block; }
+      table.nums { border-collapse: collapse; font-size: 13px; margin: 0 0 1rem; }
+      table.nums th, table.nums td { border: 1px solid var(--border); padding: 0.3rem 0.6rem; text-align: left; }
+      table.nums th { color: var(--dim); font-weight: 400; }
+      table.nums td.n { text-align: right; }
+    </style>
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="/">darsh<span>@</span>demos <span>~</span></a>
+        <nav class="nav">
+          <a href="/">index</a>
+          <a href="/raft/">raft</a>
+          <a href="/robot-factory/">robot-factory</a>
+          <a href="/image-processing/">image-processing</a>
+          <a href="/meditrack/" aria-current="page">meditrack</a>
+        </nav>
+        <a class="ext" href="https://github.com/darshpandya02/meditrack">source ↗</a>
+      </div>
+    </div>
+
+    <main>
+      <section class="window">
+        <header><div class="dots"><i></i><i></i><i></i></div><div class="title">darsh@demos — meditrack</div></header>
+        <div class="body">
+          <h1>MediTrack</h1>
+          <p>
+            <span class="tag">C#</span><span class="tag">ASP.NET Core 10</span><span class="tag">EF Core</span><span class="tag">PostgreSQL</span><span class="tag">Identity + JWT</span><span class="tag">Razor Pages</span>
+          </p>
+          <p class="lead">
+            A medical inventory system for hospital drugs and supplies, tracked by lot and expiry date
+            across departments. It has a REST API with JWT bearer auth and Swagger, and a Razor Pages
+            web app with cookie sign-in through ASP.NET Core Identity. Both share one service layer and
+            one set of role policies (Admin, Pharmacist, DepartmentStaff, Auditor). Issuing is always
+            first-expiry-first-out. Every stock row carries an optimistic concurrency token, and every
+            change is written to an append-only ledger.
+          </p>
+          <p>
+            Rebuilt from scratch in 2026. The original 2022 project code was not preserved. It runs on
+            PostgreSQL or SQLite, not SQL Server.
+          </p>
+          <p>
+            Source: <a href="https://github.com/darshpandya02/meditrack">github.com/darshpandya02/meditrack</a>
+          </p>
+        </div>
+      </section>
+
+      <section class="window">
+        <header><div class="dots"><i></i><i></i><i></i></div><div class="title">meditrack-walkthrough.mp4 — 1280×800, 71 s</div></header>
+        <div class="body flush">
+          <video class="video" controls preload="metadata" playsinline poster="/meditrack/poster.jpg" width="1280" height="800">
+            <source src="/meditrack/meditrack-walkthrough.mp4" type="video/mp4" />
+            Your browser cannot play this video. <a href="/meditrack/meditrack-walkthrough.mp4">Download the MP4</a>.
+          </video>
+        </div>
+      </section>
+
+      <section class="window">
+        <header><div class="dots"><i></i><i></i><i></i></div><div class="title">ls screenshots/</div></header>
+        <div class="body">
+          <p class="dim">Frames saved by the same browser run as the video. Click one for full size.</p>
+          <div class="grid shots">
+            <figure><a href="/meditrack/shots/02-dashboard.png"><img src="/meditrack/shots/02-dashboard.png" alt="Dashboard with low-stock and near-expiry alerts" loading="lazy" /></a><figcaption><span class="label">Pharmacist dashboard</span><code>5 low-stock and 10 near-expiry alerts from the seeded hospital</code></figcaption></figure>
+            <figure><a href="/meditrack/shots/04-receive-result.png"><img src="/meditrack/shots/04-receive-result.png" alt="Receive result" loading="lazy" /></a><figcaption><span class="label">Receive a lot</span><code>30 epinephrine ampules into the ER, one ledger row</code></figcaption></figure>
+            <figure><a href="/meditrack/shots/05-fefo-issue.png"><img src="/meditrack/shots/05-fefo-issue.png" alt="FEFO issue split across two lots" loading="lazy" /></a><figcaption><span class="label">FEFO issue</span><code>35 ondansetron: 28 from the lot expiring 2026-11-19, 7 from 2027-05-12</code></figcaption></figure>
+            <figure><a href="/meditrack/shots/06-low-stock-alert.png"><img src="/meditrack/shots/06-low-stock-alert.png" alt="Low-stock alerts" loading="lazy" /></a><figcaption><span class="label">Low-stock alert</span><code>ER acetaminophen 190 against 200 after an issue of 120</code></figcaption></figure>
+            <figure><a href="/meditrack/shots/08-audit-trail.png"><img src="/meditrack/shots/08-audit-trail.png" alt="Audit trail" loading="lazy" /></a><figcaption><span class="label">Audit trail</span><code>signed change, balance after, user, UTC time</code></figcaption></figure>
+            <figure><a href="/meditrack/shots/09-staff-dashboard.png"><img src="/meditrack/shots/09-staff-dashboard.png" alt="Department staff dashboard" loading="lazy" /></a><figcaption><span class="label">DepartmentStaff view</span><code>ER only; no Receive, Transfer, Adjust or Audit trail</code></figcaption></figure>
+            <figure><a href="/meditrack/shots/10-staff-forbidden.png"><img src="/meditrack/shots/10-staff-forbidden.png" alt="Access denied" loading="lazy" /></a><figcaption><span class="label">Forbidden action blocked</span><code>GET /Stock/Receive as DepartmentStaff: 403</code></figcaption></figure>
+            <figure><a href="/meditrack/shots/11-swagger-token.png"><img src="/meditrack/shots/11-swagger-token.png" alt="Swagger token call" loading="lazy" /></a><figcaption><span class="label">Swagger: get a JWT</span><code>POST /api/auth/token as the ER nurse: 200</code></figcaption></figure>
+            <figure><a href="/meditrack/shots/12-swagger-403.png"><img src="/meditrack/shots/12-swagger-403.png" alt="Swagger 403" loading="lazy" /></a><figcaption><span class="label">Swagger: forbidden</span><code>POST /api/stock/receive with the nurse's JWT: 403</code></figcaption></figure>
+            <figure><a href="/meditrack/shots/13-swagger-alerts.png"><img src="/meditrack/shots/13-swagger-alerts.png" alt="Swagger alerts" loading="lazy" /></a><figcaption><span class="label">Swagger: allowed read</span><code>GET /api/alerts/low-stock: 200, ER rows only</code></figcaption></figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="window">
+        <header><div class="dots"><i></i><i></i><i></i></div><div class="title">meditrack.cast — 110×32</div></header>
+        <div class="body flush">
+          <div class="player" data-cast="/casts/meditrack.cast" data-poster="npt:0:6"></div>
+        </div>
+      </section>
+
+      <section class="window">
+        <header><div class="dots"><i></i><i></i><i></i></div><div class="title">cat NOTES</div></header>
+        <div class="body">
+          <p class="meta">
+            <span><b>recorded</b> 2026-09-26</span>
+            <span><b>machine</b> MacBook Air, Apple M5, 24 GB, macOS 26.5.2</span>
+            <span><b>stack</b> .NET 10.0.12, PostgreSQL 17.11 (local), Chromium via Playwright</span>
+          </p>
+
+          <h2>What the video shows</h2>
+          <ul>
+            <li>The pharmacist signs in to the Razor Pages app (cookie auth through ASP.NET Core Identity).
+              The dashboard lists low-stock and near-expiry alerts from a freshly seeded database.</li>
+            <li>A new epinephrine lot is received into the ER. The operation page shows the ledger row it wrote.</li>
+            <li>An issue of 35 ondansetron from the ER. The service picks lots first-expiry-first-out and splits
+              the issue across two lots.</li>
+            <li>An issue of 120 acetaminophen drops the ER below its reorder level, and the low-stock alert appears.
+              The expired ibuprofen lot in Pediatrics is listed under near expiry and is never issued.</li>
+            <li>The ER nurse (DepartmentStaff) signs in. The menu has no Receive, Transfer, Adjust or Audit trail,
+              and going to <code>/Stock/Receive</code> directly returns 403.</li>
+            <li>In Swagger UI on the API: a JWT for the nurse from <code>POST /api/auth/token</code>, then
+              <code>POST /api/stock/receive</code> with that token returns 403 and
+              <code>GET /api/alerts/low-stock</code> returns 200 with ER rows only.</li>
+          </ul>
+          <p class="dim">
+            The captions were overlaid by the recording script. The browser was driven by
+            <a href="https://github.com/darshpandya02/meditrack/blob/main/scripts/walkthrough.py">scripts/walkthrough.py</a>
+            against a local instance, and the WebM from Playwright was converted to H.264 MP4 with ffmpeg, without edits.
+          </p>
+
+          <h2>What the terminal recording shows</h2>
+          <ul>
+            <li>51 unit tests and 105 integration tests pass. The integration tests use a separate throwaway
+              PostgreSQL 17 database per fixture.</li>
+            <li>The concurrency test sends 50 requests at once through the HTTP pipeline: 40 issues and 10 transfers
+              of 3 units each, 150 units asked for, 100 on hand. Exactly 33 succeed, 17 get
+              <code>409 Insufficient stock</code>, 1 unit is left, and every unit is accounted for.</li>
+            <li>The control experiment runs the same race with the concurrency token switched off. All 50 issues
+              "succeed", 150 units are issued from 100 on hand, and the shelf still reads 91. With the token:
+              33 succeed, 99 issued, 1 left.</li>
+          </ul>
+
+          <h2>Measured query speed-up</h2>
+          <p class="dim">
+            Audit-trail query (newest 50 plus count) on 50,000 movements, local PostgreSQL 17, 600 samples per case.
+            Before: foreign-key indexes only and a tracked query with Include. After: composite indexes on
+            (PerformedAt), (ItemId, PerformedAt), (LocationId, PerformedAt), plus AsNoTracking with a projection.
+          </p>
+          <table class="nums">
+            <tr><th>Query</th><th>before, median</th><th>after, median</th><th>change</th></tr>
+            <tr><td>audit trail, no filter</td><td class="n">15.94 ms</td><td class="n">3.26 ms</td><td class="n">80% lower</td></tr>
+            <tr><td>one location, last 30 days</td><td class="n">3.70 ms</td><td class="n">0.80 ms</td><td class="n">78% lower</td></tr>
+            <tr><td>one item's history</td><td class="n">1.55 ms</td><td class="n">0.71 ms</td><td class="n">54% lower</td></tr>
+          </table>
+
+          <h2>Exact commands</h2>
+          <p class="dim">
+            These are the commands the terminal recording ran, in order, from a meditrack checkout. The script is
+            <a href="https://github.com/darshpandya02/project-demos/blob/main/recording/meditrack.sh">recording/meditrack.sh</a>,
+            recorded with <code>asciinema rec --cols 110 --rows 32 -i 2 -c "bash recording/meditrack.sh"</code>.
+            The database password came from <code>PGPASSWORD</code> in the environment.
+          </p>
+          <!-- commands:meditrack.sh -->
+
+          <h2>Why a recording and not a live app</h2>
+          <p class="dim">
+            The app is .NET, which this static host does not run. The repository has a Dockerfile, a Render
+            Blueprint and an Azure App Service guide for hosting it.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="status">
+      <div class="inner">
+        <span class="mode">NORMAL</span>
+        <span class="dim">recorded 2026-09-26 on a MacBook Air (Apple M5, 24 GB), macOS 26.5.2</span>
+        <span class="faint">│</span>
+        <a href="https://github.com/darshpandya02/meditrack">meditrack</a>
+        <a href="https://github.com/darshpandya02/project-demos">source of this site</a>
+      </div>
+    </footer>
+  </body>
+</html>

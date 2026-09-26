@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0b0e14" />
     <title>Project demos — Darsh Pandya</title>
-    <meta name="description" content="Recorded terminal sessions of three command-line and desktop projects by Darsh Pandya: a Raft cluster, a primary-backup robot factory, and a Java image processor." />
+    <meta name="description" content="Recorded terminal sessions of three command-line and desktop projects by Darsh Pandya: a Raft cluster, a primary-backup robot factory, and a Java image processor, plus a browser walkthrough of the MediTrack inventory web app." />
     <script type="module" src="/src/main.js"></script>
   </head>
   <body>
@@ -17,6 +17,7 @@
           <a href="/raft/">raft</a>
           <a href="/robot-factory/">robot-factory</a>
           <a href="/image-processing/">image-processing</a>
+          <a href="/meditrack/">meditrack</a>
         </nav>
         <a class="ext" href="https://darshpandya.vercel.app">portfolio ↗</a>
       </div>
@@ -32,11 +33,12 @@
             This site plays back real terminal sessions of them instead. Each session was recorded
             with <a href="https://asciinema.org">asciinema</a> on my laptop, running the code from the
             public repositories. The output has not been edited. The gallery images are the
-            program's own output files.
+            program's own output files. The MediTrack page is different: it is a web app, shown as a
+            recorded browser walkthrough plus a recording of its test suite.
           </p>
           <p class="dim">
             The site is fully static. Nothing runs on a server: the players replay recorded
-            <code>.cast</code> files, and the gallery shows pre-computed images.
+            <code>.cast</code> files, the gallery shows pre-computed images, and the walkthrough is a video.
           </p>
         </div>
       </section>
@@ -56,6 +58,11 @@
           <span class="path">~/image-processing/</span>
           <h3>image-processing-application</h3>
           <p>A Java MVC image editor, run through its text and script mode. Includes a before/after gallery of every operation on four sample images.</p>
+        </a>
+        <a class="card" href="/meditrack/">
+          <span class="path">~/meditrack/</span>
+          <h3>MediTrack</h3>
+          <p>A medical inventory system in ASP.NET Core and EF Core on PostgreSQL. A browser walkthrough (FEFO issuing, a low-stock alert, a blocked action, Swagger with a JWT), then the test suite and a 50-request concurrency race.</p>
         </a>
       </div>
     </main>
