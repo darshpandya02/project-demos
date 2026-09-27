@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b0e14" />
+    <title>TaskMaster (Android) demo — Darsh Pandya</title>
+    <meta name="description" content="Emulator screen recording of TaskMaster, a Kotlin Android task manager with Room, ViewModel and LiveData, WorkManager reminders and file backup, plus its unit, Room, WorkManager and Espresso test runs." />
+    <script type="module" src="/src/main.js"></script>
+    <style>
+      .phone { display: block; width: 100%; max-width: 380px; height: auto; margin: 0 auto; background: #000; border-radius: 6px; }
+      .body.center { text-align: center; }
+      .shots { grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr)); }
+      .shots a { display: block; }
+      table.nums { border-collapse: collapse; font-size: 13px; margin: 0 0 1rem; }
+      table.nums th, table.nums td { border: 1px solid var(--border); padding: 0.3rem 0.6rem; text-align: left; }
+      table.nums th { color: var(--dim); font-weight: 400; }
+      table.nums td.n { text-align: right; }
+      .download { display: inline-block; margin: 0.25rem 0 0.75rem; padding: 0.45rem 0.9rem; border: 1px solid var(--border); border-radius: 6px; }
+    </style>
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="/">darsh<span>@</span>demos <span>~</span></a>
+        <nav class="nav">
+          <a href="/">index</a>
+          <a href="/raft/">raft</a>
+          <a href="/robot-factory/">robot-factory</a>
+          <a href="/image-processing/">image-processing</a>
+          <a href="/meditrack/">meditrack</a>
+          <a href="/data-structures/">data-structures</a>
+          <a href="/taskmaster/" aria-current="page">taskmaster</a>
+          <a href="/taskmanager-swift/">taskmanager-swift</a>
+        </nav>
+        <a class="ext" href="https://github.com/darshpandya02/taskmaster-android">source ↗</a>
+      </div>
+    </div>
+
+    <main>
+      <section class="window">
+        <header><div class="dots"><i></i><i></i><i></i></div><div class="title">darsh@demos — taskmaster</div></header>
+        <div class="body">
+          <h1>TaskMaster (Android)</h1>
+          <p>
+            <span class="tag">Kotlin</span><span class="tag">Room</span><span class="tag">ViewModel + LiveData</span><span class="tag">RecyclerView</span><span class="tag">WorkManager</span><span class="tag">Espresso</span>
+          </p>
+          <p class="lead">
+            A task manager for Android. Tasks live in a Room database behind a repository, and the screens
+            follow MVVM with ViewModel and LiveData. The list is a RecyclerView with ListAdapter and DiffUtil,
+            with search, All/Active/Done filters, swipe to delete and undo. A task with a due date gets a
+            WorkManager job that posts a notification on a "Task reminders" channel, with a Mark done action.
+            Backup goes through a <code>BackupProvider</code> interface: a JSON file export and import through
+            the system file picker works; Google Drive does not (see below).
+          </p>
+          <p>
+            Rebuilt from scratch in 2026. The original 2022-23 project code was not preserved.
+          </p>
+          <p>
+            Source: <a href="https://github.com/darshpandya02/taskmaster-android">github.com/darshpandya02/taskmaster-android</a><br />
+            <a class="download" href="https://github.com/darshpandya02/taskmaster-android/releases/download/v1.0.0/taskmaster-1.0.0.apk">Download taskmaster-1.0.0.apk (2.1 MB)</a>
+            <span class="dim">Android 8.0+. Signed with a throwaway key, so Android asks to allow installs from unknown sources.</span>
+          </p>
+        </div>
+      </section>
+
+      <section class="window">
+        <header><div class="dots"><i></i><i></i><i></i></div><div class="title">taskmaster-demo.mp4 — 540×1200, 3 min 17 s (2× speed)</div></header>
+        <div class="body center">
+          <video class="phone" controls preload="metadata" playsinline poster="/taskmaster/poster.jpg" width="540" height="1200">
+            <source src="/taskmaster/taskmaster-demo.mp4" type="video/mp4" />
+            Your browser cannot play this video. <a href="/taskmaster/taskmaster-demo.mp4">Download the MP4</a>.
+          </video>
+          <p class="dim">
+            Recorded with <code>adb shell screenrecord</code> on an Android 14 emulator, running the release APK.
+            The 6 min 33 s run is played back at twice the speed, without cuts.
+          </p>
+        </div>
+      </section>
+
+      <section class="window">
+        <header><div class="dots"><i></i><i></i><i></i></div><div class="title">ls screenshots/</div></header>
+        <div class="body">
+          <p class="dim">Saved with <code>adb exec-out screencap</code> during the same run as the video. Click one for full size.</p>
+          <div class="grid shots">
+            <figure><a href="/taskmaster/shots/02-list.png"><img src="/taskmaster/shots/02-list.png" alt="Task list with four tasks" loading="lazy" /></a><figcaption><span class="label">Task list</span><code>open first, by due date; bar colour is priority</code></figcaption></figure>
+            <figure><a href="/taskmaster/shots/03-edit.png"><img src="/taskmaster/shots/03-edit.png" alt="Edit task screen" loading="lazy" /></a><figcaption><span class="label">Edit</span><code>title, notes, due date, priority</code></figcaption></figure>
+            <figure><a href="/taskmaster/shots/04-completed.png"><img src="/taskmaster/shots/04-completed.png" alt="Completed task" loading="lazy" /></a><figcaption><span class="label">Complete</span><code>ticked task moves below open ones</code></figcaption></figure>
+            <figure><a href="/taskmaster/shots/05-search.png"><img src="/taskmaster/shots/05-search.png" alt="Search results" loading="lazy" /></a><figcaption><span class="label">Search</span><code>"report" over title and notes</code></figcaption></figure>
+            <figure><a href="/taskmaster/shots/06-swipe-undo.png"><img src="/taskmaster/shots/06-swipe-undo.png" alt="Swipe to delete with undo" loading="lazy" /></a><figcaption><span class="label">Swipe to delete</span><code>snackbar with Undo</code></figcaption></figure>
+            <figure><a href="/taskmaster/shots/07-export-picker.png"><img src="/taskmaster/shots/07-export-picker.png" alt="System save dialog" loading="lazy" /></a><figcaption><span class="label">Export</span><code>system file picker (Storage Access Framework)</code></figcaption></figure>
+            <figure><a href="/taskmaster/shots/09-imported.png"><img src="/taskmaster/shots/09-imported.png" alt="Imported tasks" loading="lazy" /></a><figcaption><span class="label">Import</span><code>deleted task is back: "Imported 3 tasks"</code></figcaption></figure>
+            <figure><a href="/taskmaster/shots/10-drive-not-configured.png"><img src="/taskmaster/shots/10-drive-not-configured.png" alt="Drive not configured dialog" loading="lazy" /></a><figcaption><span class="label">Google Drive</span><code>shown as not configured (no OAuth client)</code></figcaption></figure>
+            <figure><a href="/taskmaster/shots/11-reminder.png"><img src="/taskmaster/shots/11-reminder.png" alt="Reminder notification" loading="lazy" /></a><figcaption><span class="label">Reminder</span><code>WorkManager job posted it at the due time</code></figcaption></figure>
+            <figure><a href="/taskmaster/shots/12-after-mark-done.png"><img src="/taskmaster/shots/12-after-mark-done.png" alt="After Mark done" loading="lazy" /></a><figcaption><span class="label">Mark done</span><code>notification action completed the task</code></figcaption></figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="window">
+        <header><div class="dots"><i></i><i></i><i></i></div><div class="title">taskmaster.cast — 110×32</div></header>
+        <div class="body flush">
+          <div class="player" data-cast="/casts/taskmaster.cast" data-poster="npt:0:6"></div>
+        </div>
+      </section>
+
+      <section class="window">
+        <header><div class="dots"><i></i><i></i><i></i></div><div class="title">cat NOTES</div></header>
+        <div class="body">
+          <p class="meta">
+            <span><b>recorded</b> 2026-09-26</span>
+            <span><b>machine</b> MacBook Air, Apple M5, 24 GB, macOS 26.5.2</span>
+            <span><b>device</b> Android 14 (API 34) arm64 emulator, Pixel 6 profile</span>
+            <span><b>stack</b> Kotlin 2.2, AGP 8.13, Room 2.8, WorkManager 2.10, OpenJDK 17</span>
+          </p>
+
+          <h2>Test results</h2>
+          <table class="nums">
+            <tr><th>Suite</th><th>where</th><th>tests</th><th>passed</th></tr>
+            <tr><td>JVM unit tests: repository, list and edit ViewModels, backup codec and manager, date text</td><td>JVM</td><td class="n">40</td><td class="n">40</td></tr>
+            <tr><td>Room DAO: ordering, search, filters, LiveData updates, transaction rollback</td><td>emulator</td><td class="n">10</td><td class="n">10</td></tr>
+            <tr><td>ReminderWorker, WorkManager scheduling, notification content</td><td>emulator</td><td class="n">4</td><td class="n">4</td></tr>
+            <tr><td>Backup round trip through the ContentResolver</td><td>emulator</td><td class="n">1</td><td class="n">1</td></tr>
+            <tr><td>Espresso: create, validate, edit, complete, swipe and undo, delete, search, date pickers, Drive menu</td><td>emulator</td><td class="n">10</td><td class="n">10</td></tr>
+          </table>
+          <p class="dim">
+            The 25 instrumented tests passed on three runs in a row locally, after a fix to one notification test
+            (the system posts notifications asynchronously, so the test now polls). GitHub Actions runs the unit
+            tests on every push, and the 25 instrumented tests on an API 34 x86_64 emulator; that job took
+            7 min 37 s on the first push, and both jobs passed.
+          </p>
+
+          <h2>What the video shows</h2>
+          <ul>
+            <li>Four tasks created: one with notes and High priority, one with a due time five minutes ahead
+              (set through the date and time pickers), two more.</li>
+            <li>A task opened and its title edited; a task ticked done; the Done and Active filters; a search for "report".</li>
+            <li>A task swiped away and restored with Undo, then deleted from its edit screen with a confirmation.</li>
+            <li>Export backup through the system file picker, a task deleted, Import backup: the task comes back.</li>
+            <li>The Google Drive backup menu item, which says it is not configured.</li>
+            <li>The reminder for the task due at 22:54 was in the notification shade when the script checked at
+              22:55:06. The notification's Mark done action completes the task.</li>
+          </ul>
+          <p class="dim">
+            The emulator was driven by
+            <a href="https://github.com/darshpandya02/taskmaster-android/blob/main/scripts/demo.py">scripts/demo.py</a>
+            (adb input and uiautomator), which also saved the screenshots.
+          </p>
+
+          <h2>Not active</h2>
+          <ul>
+            <li><b>Google Drive backup.</b> It needs an OAuth client registered in a Google Cloud project for this
+              package and signing key, and none exists. <code>DriveBackupProvider</code> reports itself unavailable
+              and every call fails. Backups go to a file the user picks.</li>
+          </ul>
+
+          <h2>Exact commands</h2>
+          <p class="dim">
+            These are the commands the terminal recording ran, in order, from a taskmaster-android checkout with the
+            emulator running. The script is
+            <a href="https://github.com/darshpandya02/project-demos/blob/main/recording/taskmaster.sh">recording/taskmaster.sh</a>,
+            recorded with <code>asciinema rec --cols 110 --rows 32 -i 2 -c "bash recording/taskmaster.sh"</code>.
+          </p>
+          <!-- commands:taskmaster.sh -->
+        </div>
+      </section>
+    </main>
+
+    <footer class="status">
+      <div class="inner">
+        <span class="mode">NORMAL</span>
+        <span class="dim">recorded 2026-09-26 on a MacBook Air (Apple M5, 24 GB), macOS 26.5.2</span>
+        <span class="faint">│</span>
+        <a href="https://github.com/darshpandya02/taskmaster-android">taskmaster-android</a>
+        <a href="https://github.com/darshpandya02/project-demos">source of this site</a>
+      </div>
+    </footer>
+  </body>
+</html>

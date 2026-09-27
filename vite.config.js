@@ -37,6 +37,8 @@ export default defineConfig({
         image: page("image-processing/index.html"),
         meditrack: page("meditrack/index.html"),
         dsl: page("data-structures/index.html"),
+        taskmaster: page("taskmaster/index.html"),
+        taskmanagerSwift: page("taskmanager-swift/index.html"),
       },
     },
   },

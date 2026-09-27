@@ -2,7 +2,8 @@
 
 For each project page: the player mounts, starts playing when clicked, and its
 current time moves forward. On the image page: every gallery image for every
-sample finishes loading with a non-zero size.
+sample finishes loading with a non-zero size. On the video pages: the video
+plays and every screenshot loads.
 
 usage: uv run --with playwright --python 3.12 python recording/verify.py BASE_URL [SCREENSHOT_DIR]
 """
@@ -13,7 +14,15 @@ from playwright.sync_api import sync_playwright
 
 BASE = sys.argv[1].rstrip("/")
 SHOTS = sys.argv[2] if len(sys.argv) > 2 else None
-PAGES = ["/raft/", "/robot-factory/", "/image-processing/", "/meditrack/", "/data-structures/"]
+PAGES = ["/raft/", "/robot-factory/", "/image-processing/", "/meditrack/", "/data-structures/",
+         "/taskmaster/", "/taskmanager-swift/"]
+
+# Pages with a video: minimum duration (s), expected width, number of screenshots.
+VIDEOS = {
+    "/meditrack/": (60, 1280, 10),
+    "/taskmaster/": (150, 540, 10),
+    "/taskmanager-swift/": (40, 1280, 10),
+}
 
 failures = []
 
@@ -72,7 +81,8 @@ with sync_playwright() as p:
             if SHOTS:
                 page.locator("#gallery").screenshot(path=f"{SHOTS}/gallery.png")
 
-        if path == "/meditrack/":
+        if path in VIDEOS:
+            min_d, width, n_shots = VIDEOS[path]
             video = page.locator("video").first
             video.scroll_into_view_if_needed()
             page.evaluate("document.querySelector('video').muted = true; document.querySelector('video').play()")
@@ -80,14 +90,17 @@ with sync_playwright() as p:
             time.sleep(2)
             v = page.evaluate("(() => { const v = document.querySelector('video');"
                               " return {t: v.currentTime, d: v.duration, w: v.videoWidth, h: v.videoHeight, err: v.error && v.error.code}; })()")
-            check(not v["err"] and v["d"] > 60 and v["w"] == 1280 and v["t"] > 0.5,
-                  f"/meditrack/ video loads and plays ({v['w']}x{v['h']}, {v['d']:.1f}s, at {v['t']:.1f}s)")
+            check(not v["err"] and v["d"] > min_d and v["w"] == width and v["t"] > 0.5,
+                  f"{path} video loads and plays ({v['w']}x{v['h']}, {v['d']:.1f}s, at {v['t']:.1f}s)")
             shots = page.locator(".shots img")
             for j in range(shots.count()):
                 shots.nth(j).scroll_into_view_if_needed()
             page.wait_for_function("[...document.querySelectorAll('.shots img')].every(i => i.complete)", timeout=30000)
             broken = page.evaluate("[...document.querySelectorAll('.shots img')].filter(i => !(i.naturalWidth > 0)).length")
-            check(shots.count() == 10 and broken == 0, f"/meditrack/ screenshots: {shots.count()} images, {broken} broken")
+            check(shots.count() == n_shots and broken == 0, f"{path} screenshots: {shots.count()} images, {broken} broken")
+            links = page.evaluate("[...document.querySelectorAll('a.download')].map(a => a.href)")
+            if path != "/meditrack/":
+                check(len(links) == 1, f"{path} has a download link ({links[:1]})")
 
     check(not errors, f"no page errors ({errors[:3]})")
     browser.close()

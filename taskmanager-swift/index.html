@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b0e14" />
+    <title>TaskManager (macOS, Swift) demo — Darsh Pandya</title>
+    <meta name="description" content="TaskManager, a macOS task manager in Swift with SwiftUI, an AppKit NSTableView list and Core Data: a window screenshot sequence of the app, screenshots, and a recording of its Swift Testing suite and app build." />
+    <script type="module" src="/src/main.js"></script>
+    <style>
+      .video { display: block; width: 100%; height: auto; background: #000; border-radius: 0 0 6px 6px; }
+      .shots { grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr)); }
+      .shots a { display: block; }
+      table.nums { border-collapse: collapse; font-size: 13px; margin: 0 0 1rem; }
+      table.nums th, table.nums td { border: 1px solid var(--border); padding: 0.3rem 0.6rem; text-align: left; }
+      table.nums th { color: var(--dim); font-weight: 400; }
+      table.nums td.n { text-align: right; }
+      .download { display: inline-block; margin: 0.25rem 0 0.75rem; padding: 0.45rem 0.9rem; border: 1px solid var(--border); border-radius: 6px; }
+    </style>
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="/">darsh<span>@</span>demos <span>~</span></a>
+        <nav class="nav">
+          <a href="/">index</a>
+          <a href="/raft/">raft</a>
+          <a href="/robot-factory/">robot-factory</a>
+          <a href="/image-processing/">image-processing</a>
+          <a href="/meditrack/">meditrack</a>
+          <a href="/data-structures/">data-structures</a>
+          <a href="/taskmaster/">taskmaster</a>
+          <a href="/taskmanager-swift/" aria-current="page">taskmanager-swift</a>
+        </nav>
+        <a class="ext" href="https://github.com/darshpandya02/taskmanager-swift">source ↗</a>
+      </div>
+    </div>
+
+    <main>
+      <section class="window">
+        <header><div class="dots"><i></i><i></i><i></i></div><div class="title">darsh@demos — taskmanager-swift</div></header>
+        <div class="body">
+          <h1>TaskManager (macOS, Swift)</h1>
+          <p>
+            <span class="tag">Swift 6</span><span class="tag">SwiftUI</span><span class="tag">AppKit</span><span class="tag">Core Data</span><span class="tag">Auto Layout</span><span class="tag">Swift Testing</span>
+          </p>
+          <p class="lead">
+            A task manager for macOS. The window is SwiftUI; the task list is an AppKit <code>NSTableView</code>
+            hosted through <code>NSViewRepresentable</code>, with cells laid out by Auto Layout constraints and
+            sortable columns. Tasks are stored with Core Data, using a model built in code. It has smart filters
+            with counts, search, undo and redo for every change, JSON export and import, and a menu bar extra.
+          </p>
+          <p>
+            Rebuilt from scratch in 2026. The original 2022-23 project code was not preserved. Only the macOS app
+            was rebuilt: the iOS (UIKit) app needs full Xcode, which this machine does not have.
+          </p>
+          <p>
+            Source: <a href="https://github.com/darshpandya02/taskmanager-swift">github.com/darshpandya02/taskmanager-swift</a><br />
+            <a class="download" href="https://github.com/darshpandya02/taskmanager-swift/releases/download/v1.0.0/TaskManager-1.0.0-macOS.zip">Download TaskManager-1.0.0-macOS.zip (0.6 MB)</a>
+            <span class="dim">macOS 14+, Apple silicon and Intel. Not notarized: on macOS 14 right-click the app and choose Open;
+              on macOS 15 and later use System Settings &gt; Privacy &amp; Security &gt; Open Anyway after the first try.</span>
+          </p>
+        </div>
+      </section>
+
+      <section class="window">
+        <header><div class="dots"><i></i><i></i><i></i></div><div class="title">taskmanager-swift-demo.mp4 — 1280×744, 46 s, screenshot sequence</div></header>
+        <div class="body flush">
+          <video class="video" controls preload="metadata" playsinline poster="/taskmanager-swift/poster.jpg" width="1280" height="744">
+            <source src="/taskmanager-swift/taskmanager-swift-demo.mp4" type="video/mp4" />
+            Your browser cannot play this video. <a href="/taskmanager-swift/taskmanager-swift-demo.mp4">Download the MP4</a>.
+          </video>
+        </div>
+      </section>
+
+      <section class="window">
+        <header><div class="dots"><i></i><i></i><i></i></div><div class="title">ls screenshots/</div></header>
+        <div class="body">
+          <p class="dim">Frames from the same run as the video. Click one for full size.</p>
+          <div class="grid shots">
+            <figure><a href="/taskmanager-swift/shots/01-new-task.png"><img src="/taskmanager-swift/shots/01-new-task.png" alt="New task editor" loading="lazy" /></a><figcaption><span class="label">New task</span><code>editor pane: title, notes, due date, priority</code></figcaption></figure>
+            <figure><a href="/taskmanager-swift/shots/02-title-required.png"><img src="/taskmanager-swift/shots/02-title-required.png" alt="Title required" loading="lazy" /></a><figcaption><span class="label">Validation</span><code>Save with an empty title is refused</code></figcaption></figure>
+            <figure><a href="/taskmanager-swift/shots/03-task-list.png"><img src="/taskmanager-swift/shots/03-task-list.png" alt="Task list" loading="lazy" /></a><figcaption><span class="label">NSTableView list</span><code>sorted by due date; overdue in red</code></figcaption></figure>
+            <figure><a href="/taskmanager-swift/shots/04-edit.png"><img src="/taskmanager-swift/shots/04-edit.png" alt="Edit task" loading="lazy" /></a><figcaption><span class="label">Edit</span><code>title changed to "Buy groceries for the week"</code></figcaption></figure>
+            <figure><a href="/taskmanager-swift/shots/05-today-filter.png"><img src="/taskmanager-swift/shots/05-today-filter.png" alt="Today filter" loading="lazy" /></a><figcaption><span class="label">Today filter</span><code>open tasks due today; counts in the sidebar</code></figcaption></figure>
+            <figure><a href="/taskmanager-swift/shots/06-sort-priority.png"><img src="/taskmanager-swift/shots/06-sort-priority.png" alt="Sorted by priority" loading="lazy" /></a><figcaption><span class="label">Sort</span><code>by priority, high first; completed stays last</code></figcaption></figure>
+            <figure><a href="/taskmanager-swift/shots/07-search.png"><img src="/taskmanager-swift/shots/07-search.png" alt="Search" loading="lazy" /></a><figcaption><span class="label">Search</span><code>"trip" in the toolbar search field</code></figcaption></figure>
+            <figure><a href="/taskmanager-swift/shots/08-delete-undo-hint.png"><img src="/taskmanager-swift/shots/08-delete-undo-hint.png" alt="Deleted task" loading="lazy" /></a><figcaption><span class="label">Delete</span><code>then undone with the Core Data undo manager</code></figcaption></figure>
+            <figure><a href="/taskmanager-swift/shots/09-all-deleted.png"><img src="/taskmanager-swift/shots/09-all-deleted.png" alt="All tasks deleted" loading="lazy" /></a><figcaption><span class="label">After export</span><code>every task deleted</code></figcaption></figure>
+            <figure><a href="/taskmanager-swift/shots/10-imported.png"><img src="/taskmanager-swift/shots/10-imported.png" alt="Imported backup" loading="lazy" /></a><figcaption><span class="label">Import</span><code>5 tasks back from taskmanager-backup.json</code></figcaption></figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="window">
+        <header><div class="dots"><i></i><i></i><i></i></div><div class="title">taskmanager-swift.cast — 110×32</div></header>
+        <div class="body flush">
+          <div class="player" data-cast="/casts/taskmanager-swift.cast" data-poster="npt:0:6"></div>
+        </div>
+      </section>
+
+      <section class="window">
+        <header><div class="dots"><i></i><i></i><i></i></div><div class="title">cat NOTES</div></header>
+        <div class="body">
+          <p class="meta">
+            <span><b>recorded</b> 2026-09-26</span>
+            <span><b>machine</b> MacBook Air, Apple M5, 24 GB, macOS 26.5.2</span>
+            <span><b>toolchain</b> Swift 6.3.3 from the Command Line Tools (no Xcode), SwiftPM</span>
+          </p>
+
+          <h2>How the video was made: not a screen recording</h2>
+          <p class="dim">
+            The terminal here does not have the screen recording permission (<code>screencapture</code> reports
+            "could not create image from display" and ffmpeg's avfoundation capture gets no frames), so the video is a
+            sequence of window screenshots. <code>TaskManager --demo-capture DIR</code> runs a fixed list of actions
+            against an in-memory store, through the same <code>AppModel</code> methods the buttons and the table call,
+            and after each step saves the window's own drawing (<code>NSView.cacheDisplay</code>) as a PNG. ffmpeg
+            joins the 42 frames with the hold times the script wrote. Nothing was clicked by hand, and the menu bar
+            extra is not in the frames.
+          </p>
+
+          <h2>Test results</h2>
+          <table class="nums">
+            <tr><th>Suite</th><th>tests</th><th>passed</th></tr>
+            <tr><td>Core Data model: entity, CloudKit rules, container kinds, reload from disk</td><td class="n">5</td><td class="n">5</td></tr>
+            <tr><td>TaskStore: add, validation, edit, complete, delete with undo and redo, change tracking, next due</td><td class="n">7</td><td class="n">7</td></tr>
+            <tr><td>Filters, search and sorting (on SQLite, so the predicates run as SQL)</td><td class="n">9</td><td class="n">9</td></tr>
+            <tr><td>JSON backup</td><td class="n">4</td><td class="n">4</td></tr>
+            <tr><td>Due date text</td><td class="n">2</td><td class="n">2</td></tr>
+          </table>
+          <p class="dim">
+            27 tests in 5 suites, all passed locally (Swift 6.3.3) and in GitHub Actions on a macos-15 runner (Swift 6.1.2).
+            The undo test found a bug on the way: changes made in the same run-loop event undid together, so the store
+            now opens one undo group per change.
+          </p>
+
+          <h2>Not active</h2>
+          <ul>
+            <li><b>iCloud sync.</b> CloudKit needs a signed app with the iCloud entitlement and a container on an Apple
+              developer account. The app uses a local SQLite store. The persistence code can build an
+              <code>NSPersistentCloudKitContainer</code> and the model follows CloudKit's rules (a test checks both), but
+              sync has never run.</li>
+            <li><b>iOS / UIKit.</b> Not rebuilt; there is no iOS target in the repository.</li>
+          </ul>
+
+          <h2>Exact commands</h2>
+          <p class="dim">
+            These are the commands the terminal recording ran, in order, from a taskmanager-swift checkout. The script is
+            <a href="https://github.com/darshpandya02/project-demos/blob/main/recording/taskmanager-swift.sh">recording/taskmanager-swift.sh</a>,
+            recorded with <code>asciinema rec --cols 110 --rows 32 -i 2 -c "bash recording/taskmanager-swift.sh"</code>.
+          </p>
+          <!-- commands:taskmanager-swift.sh -->
+        </div>
+      </section>
+    </main>
+
+    <footer class="status">
+      <div class="inner">
+        <span class="mode">NORMAL</span>
+        <span class="dim">recorded 2026-09-26 on a MacBook Air (Apple M5, 24 GB), macOS 26.5.2</span>
+        <span class="faint">│</span>
+        <a href="https://github.com/darshpandya02/taskmanager-swift">taskmanager-swift</a>
+        <a href="https://github.com/darshpandya02/project-demos">source of this site</a>
+      </div>
+    </footer>
+  </body>
+</html>

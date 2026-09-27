@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0b0e14" />
     <title>Project demos — Darsh Pandya</title>
-    <meta name="description" content="Recorded terminal sessions of four command-line, desktop and library projects by Darsh Pandya: a Raft cluster, a primary-backup robot factory, a Java image processor, and a C++ data structure library, plus a browser walkthrough of the MediTrack inventory web app." />
+    <meta name="description" content="Recorded terminal sessions of four command-line, desktop and library projects by Darsh Pandya: a Raft cluster, a primary-backup robot factory, a Java image processor, and a C++ data structure library, plus a browser walkthrough of the MediTrack inventory web app and two native task manager apps (Android and macOS)." />
     <script type="module" src="/src/main.js"></script>
   </head>
   <body>
@@ -19,6 +19,8 @@
           <a href="/image-processing/">image-processing</a>
           <a href="/meditrack/">meditrack</a>
           <a href="/data-structures/">data-structures</a>
+          <a href="/taskmaster/">taskmaster</a>
+          <a href="/taskmanager-swift/">taskmanager-swift</a>
         </nav>
         <a class="ext" href="https://darshpandya.vercel.app">portfolio ↗</a>
       </div>
@@ -35,11 +37,13 @@
             with <a href="https://asciinema.org">asciinema</a> on my laptop, running the code from the
             public repositories. The output has not been edited. The gallery images are the
             program's own output files. The MediTrack page is different: it is a web app, shown as a
-            recorded browser walkthrough plus a recording of its test suite.
+            recorded browser walkthrough plus a recording of its test suite. The two task manager pages show
+            native apps: an Android emulator screen recording, and a macOS app shown as a sequence of window
+            screenshots, each with a recording of its tests.
           </p>
           <p class="dim">
             The site is fully static. Nothing runs on a server: the players replay recorded
-            <code>.cast</code> files, the gallery shows pre-computed images, and the walkthrough is a video.
+            <code>.cast</code> files, the gallery shows pre-computed images, and the walkthroughs are videos.
           </p>
         </div>
       </section>
@@ -69,6 +73,16 @@
           <span class="path">~/data-structures/</span>
           <h3>cpp-data-structures</h3>
           <p>A header-only C++20 data structure library. Its tests run under ASan, UBSan and TSan, plus a leak check. Then an AVL tree rebalancing insert by insert, hash map rehashing, and a benchmark against the std:: containers.</p>
+        </a>
+        <a class="card" href="/taskmaster/">
+          <span class="path">~/taskmaster/</span>
+          <h3>TaskMaster (Android)</h3>
+          <p>A Kotlin task manager on Room with ViewModel and LiveData. An emulator screen recording: create, edit, complete, search, swipe to delete, file export and import, and a WorkManager reminder notification. Then its unit, Room, WorkManager and Espresso tests.</p>
+        </a>
+        <a class="card" href="/taskmanager-swift/">
+          <span class="path">~/taskmanager-swift/</span>
+          <h3>TaskManager (macOS, Swift)</h3>
+          <p>A macOS task manager in SwiftUI with an AppKit NSTableView list, on Core Data. A window screenshot sequence of the app (filters, sorting, search, undo, backup), then its Swift Testing suite and the app bundle build.</p>
         </a>
       </div>
     </main>
